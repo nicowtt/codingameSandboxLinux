@@ -1,37 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/0/0039bacc787058300f51c350355999ad86bfff80" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/a/0af1b8fac2070a86d1131ba15e93dd7b384d4b84" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/0/308aa77e73534dd6fdf32e5c9c48ede70597b5c3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/9/397dbf92f568f8702f1d01f191ef5a699aa9c70e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/c/4ccf425b4ef36628cc02d295279ba15aafc23ad1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/8/7824e9f07399b02ebdb957508e1fe1ea3d9b5ce7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/e/8e043be4cbe338e2d58b6f49ffdab2aa43059bcd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/9/9918cb1469126044bb30b5196d466ef53d28993f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/7/a7a0220515db90e8c27706a54f68313836ea7523" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/8/a8a975f8a30ac64d3aed1018bba90d5bb9aa59bc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/4/c4024df08590d1e04b3e102b5c4d7383bcd1abf3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CodingGame.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/compiler.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Deploy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/LocateOpponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Move.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Submarine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Torpedo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Utils.java" afterDir="false" />
-    </list>
+    <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +124,7 @@
       <workItem from="1586261353914" duration="598000" />
       <workItem from="1586262100166" duration="77000" />
       <workItem from="1586262240890" duration="9000" />
-      <workItem from="1601387072351" duration="3474000" />
+      <workItem from="1601387072351" duration="3788000" />
     </task>
     <servers />
   </component>
