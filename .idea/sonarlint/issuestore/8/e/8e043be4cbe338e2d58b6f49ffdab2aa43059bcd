@@ -1,0 +1,35 @@
+
+k
+java:S1192"IDefine a constant instead of duplicating this literal "TORPEDO " 3 times.(“ØõÁøÿÿÿÿ8©ÈâÏ”.
+†
+java:S1488"dImmediately return this expression instead of assigning it to the temporary variable "opponentMove".(‰ší¹ûÿÿÿÿ8©ÈâÏ”.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(«®É şÿÿÿÿ8©ÈâÏ”.
+c
+java:S1126!"AReplace this if-then-else statement by a single return statement.(Á§Áúùÿÿÿÿ8©ÈâÏ”.
+[
+java:S21301"9Use "Integer.parseInt" for this string-to-int conversion.(æÙˆøşÿÿÿÿ8©ÈâÏ”.
+U
+java:S21302"9Use "Integer.parseInt" for this string-to-int conversion.(÷å“%8©ÈâÏ”.
+[
+java:S2130:"9Use "Integer.parseInt" for this string-to-int conversion.(æÙˆøşÿÿÿÿ8©ÈâÏ”.
+U
+java:S2130;"9Use "Integer.parseInt" for this string-to-int conversion.(÷å“%8©ÈâÏ”.
+U	java:S106B"9Replace this use of System.out or System.err by a logger.(±›şà8©ÈâÏ”.
+T	java:S106W"9Replace this use of System.out or System.err by a logger.(§’«$8©ÈâÏ”.
+Z	java:S106l"9Replace this use of System.out or System.err by a logger.(³øé÷ùÿÿÿÿ8©ÈâÏ”.
+I
+java:S1172|",Remove this unused method parameter "board".(İ§Èï8©ÈâÏ”.
+V
+java:S1197„"8Move the array designator from the variable to the type.(ÙîĞ¡8©ÈâÏ”.
+J
+java:S1172Œ",Remove this unused method parameter "board".(§Üœ8©ÈâÏ”.
+_
+java:S1126"AReplace this if-then-else statement by a single return statement.(Ã¦¸8©ÈâÏ”.
+]	java:S125"<This block of commented-out lines of code should be removed.(ª‘¾¼şÿÿÿÿ8©ÈâÏ”.
+W	java:S125U"<This block of commented-out lines of code should be removed.(µÙÔ$8©ÈâÏ”.
+X	java:S125Z"<This block of commented-out lines of code should be removed.(ßæ£®8©ÈâÏ”.
+]	java:S125b"<This block of commented-out lines of code should be removed.(ÃƒÎÅşÿÿÿÿ8©ÈâÏ”.
+]	java:S125d"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8©ÈâÏ”.
+W	java:S125t"<This block of commented-out lines of code should be removed.(Ç¦Ğ8©ÈâÏ”.
+^	java:S125‚"<This block of commented-out lines of code should be removed.(“ğû‘ÿÿÿÿÿ8©ÈâÏ”.
+^	java:S125ˆ"<This block of commented-out lines of code should be removed.(Š÷íÖıÿÿÿÿ8©ÈâÏ”.

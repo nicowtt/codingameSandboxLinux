@@ -1,0 +1,23 @@
+
+e
+java:S1192,"HDefine a constant instead of duplicating this literal "SURFACE" 3 times.(­¢Ğ8Ñ€äÏ”.
+c
+java:S1192&"FDefine a constant instead of duplicating this literal "MOVE " 6 times.(èÊâÒ8Ñ€äÏ”.
+„
+java:S1488{"gImmediately return this expression instead of assigning it to the temporary variable "goToDestination".(£…•‚8Ñ€äÏ”.
+‡
+java:S1488‘"jImmediately return this expression instead of assigning it to the temporary variable "randomCellOnSector".(ñşØ`8Ñ€äÏ”.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(ø Ôéşÿÿÿÿ8Ñ€äÏ”.
+U	java:S1066"9Replace this use of System.out or System.err by a logger.(–ŒÀı8Ñ€äÏ”.
+@
+java:S2119e"Save and re-use this "Random".(šŸ«íøÿÿÿÿ8Ñ€äÏ”.
+U	java:S106i"9Replace this use of System.out or System.err by a logger.(«©ÜÓ8Ñ€äÏ”.
+U	java:S106m"9Replace this use of System.out or System.err by a logger.(²ó»8Ñ€äÏ”.
+Z	java:S106o"9Replace this use of System.out or System.err by a logger.(›³Ê³ùÿÿÿÿ8Ñ€äÏ”.
+A
+java:S2119ƒ"Save and re-use this "Random".(šŸ«íøÿÿÿÿ8Ñ€äÏ”.
+[	java:S106"9Replace this use of System.out or System.err by a logger.(“Í‘ûÿÿÿÿ8Ñ€äÏ”.
+X	java:S125R"<This block of commented-out lines of code should be removed.(íòš8Ñ€äÏ”.
+X	java:S125}"<This block of commented-out lines of code should be removed.(‚ãË§8Ñ€äÏ”.
+Y	java:S125±"<This block of commented-out lines of code should be removed.(ïú¶ô8Ñ€äÏ”.
+Y	java:S125¼"<This block of commented-out lines of code should be removed.(ë›Æ³8Ñ€äÏ”.

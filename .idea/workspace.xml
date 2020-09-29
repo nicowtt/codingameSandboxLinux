@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/0/0039bacc787058300f51c350355999ad86bfff80" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/a/0af1b8fac2070a86d1131ba15e93dd7b384d4b84" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/0/308aa77e73534dd6fdf32e5c9c48ede70597b5c3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/9/397dbf92f568f8702f1d01f191ef5a699aa9c70e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/c/4ccf425b4ef36628cc02d295279ba15aafc23ad1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/8/7824e9f07399b02ebdb957508e1fe1ea3d9b5ce7" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/e/8e043be4cbe338e2d58b6f49ffdab2aa43059bcd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/9/9918cb1469126044bb30b5196d466ef53d28993f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/7/a7a0220515db90e8c27706a54f68313836ea7523" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/8/a8a975f8a30ac64d3aed1018bba90d5bb9aa59bc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/4/c4024df08590d1e04b3e102b5c4d7383bcd1abf3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CodingGame.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/compiler.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Deploy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/LocateOpponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Move.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Submarine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Torpedo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Utils.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1a2tw1377H5wamLtMX4CFOSfrew" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="NewWatcherDialog.advanced.open" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.play">
+    <configuration name="play" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Player" />
+      <module name="CodingGame" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="compiler.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+      <module name="Test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="PROJECT_INTERPRETER" value="false" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\nicob\Desktop\Test" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\nicob\Desktop\Test\compiler.sh" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand />
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="" />
+      <created>1585933018323</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585933018323</updated>
+      <workItem from="1585933021146" duration="2646000" />
+      <workItem from="1585935687857" duration="176000" />
+      <workItem from="1585935880905" duration="565000" />
+      <workItem from="1585936464724" duration="327000" />
+      <workItem from="1585936807983" duration="89000" />
+      <workItem from="1585936918846" duration="122000" />
+      <workItem from="1585937056619" duration="365000" />
+      <workItem from="1585937439572" duration="250000" />
+      <workItem from="1585937707127" duration="147000" />
+      <workItem from="1585937871962" duration="345000" />
+      <workItem from="1585944345298" duration="370000" />
+      <workItem from="1585938079026" duration="230000" />
+      <workItem from="1585945752466" duration="62000" />
+      <workItem from="1585945828424" duration="185000" />
+      <workItem from="1585946313227" duration="873000" />
+      <workItem from="1585947202212" duration="801000" />
+      <workItem from="1585948024986" duration="325000" />
+      <workItem from="1586079961063" duration="1018000" />
+      <workItem from="1586080992866" duration="377000" />
+      <workItem from="1586083822830" duration="1877000" />
+      <workItem from="1586090629026" duration="4277000" />
+      <workItem from="1586094919853" duration="170000" />
+      <workItem from="1586095104219" duration="599000" />
+      <workItem from="1586159737848" duration="598000" />
+      <workItem from="1586261353914" duration="598000" />
+      <workItem from="1586262100166" duration="77000" />
+      <workItem from="1586262240890" duration="9000" />
+      <workItem from="1601387072351" duration="3474000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.configurationType" implementationName="BashConfigurationType" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

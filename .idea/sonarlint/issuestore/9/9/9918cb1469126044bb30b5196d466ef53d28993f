@@ -1,0 +1,19 @@
+
+W	java:S1253"<This block of commented-out lines of code should be removed.(ñ¥&8ŠØêÏ”.
+^	java:S125§"<This block of commented-out lines of code should be removed.(õ÷à‰úÿÿÿÿ8ŠØêÏ”.
+
+java:S1488"bImmediately return this expression instead of assigning it to the temporary variable "randomCell".(¯êà®8ŠØêÏ”.
+v
+java:S2293x"YReplace the type specification in this constructor call with the diamond operator ("<>").(µÿËé8ŠØêÏ”.
+{
+java:S2293f"YReplace the type specification in this constructor call with the diamond operator ("<>").(Àë³¶ÿÿÿÿÿ8ŠØêÏ”.
+Y	java:S125¾"<This block of commented-out lines of code should be removed.(àÇò§8ŠØêÏ”.
+]	java:S125s"<This block of commented-out lines of code should be removed.(ø‹ÖÍûÿÿÿÿ8ŠØêÏ”.
+^	java:S125Ï"<This block of commented-out lines of code should be removed.(ÍŒ—Öøÿÿÿÿ8ŠØêÏ”.
+@
+java:S2119"Save and re-use this "Random".(šŸ«íøÿÿÿÿ8ŠØêÏ”.
+t
+java:S3776w"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(É‚±øÿÿÿÿ8ŠØêÏ”.
+]	java:S125a"<This block of commented-out lines of code should be removed.(İ÷­úÿÿÿÿ8ŠØêÏ”.
+v
+java:S2293Y"YReplace the type specification in this constructor call with the diamond operator ("<>").(·Õ¬Ô8ŠØêÏ”.
