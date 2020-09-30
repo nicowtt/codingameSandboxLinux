@@ -1,290 +1,468 @@
+
 import java.util.*;
+import java.io.*;
+import java.math.*;
 
 /**
  * Auto-generated code below aims at helping you parse
  * the standard input according to the problem statement.
  **/
 class Player {
-    private Deploy deploy;
-    private Move move;
-    private Submarine mySubmarine;
-    private Submarine opponentSubmarine;
-    private Board board;
-    private Utils utils;
-    private Torpedo torpedo;
-    private LocateOpponent locateOpponent;
-    private List<Cell> listCellAlreadyVisited;
+
+    private List<List<String>> simuOrders = new ArrayList<>();
+    private char[][] simuMap;
+    private char[][] map;
+    private SimuUnit simuUnit;
+    private int lastRoad;
+    private String bestOrder;
+    List<Bike> bikes;
+    List<Bike> simuBikes;
+    private int lastPosx;
+    private int minBikeWhoSurvive;
 
     public static void main(String args[]) {
-      new Player().run();
+        new Player().run();
     }
-
     public void run() {
-        move = new Move();
-        mySubmarine = new Submarine();
-        opponentSubmarine = new Submarine();
-        board = new Board();
-        utils = new Utils();
-        torpedo = new Torpedo();
-        locateOpponent = new LocateOpponent();
-        listCellAlreadyVisited = new ArrayList<>();
-
-        String chargeSonar = "SONAR";
-        String chargeTorpedo = "TORPEDO";
-        String chargeSilence = "SILENCE";
-        String sentSonar = "SONAR ";
-        String silence = "SILENCE ";
-        boolean isOpponentSentTorpedo = false;
-        boolean loadedTorpedo = false;
-        boolean loadedSonar = false;
-        boolean loadedSilence = false;
-
+        List<String> roads = new ArrayList<>();
+        this.bikes = new ArrayList<>();
+        int loop = 0;
         Scanner in = new Scanner(System.in);
-        int width = in.nextInt();
-        int height = in.nextInt();
-        board.updateBoard(width, height);
-
-        int myId = in.nextInt();
-        if (in.hasNextLine()) {
-            in.nextLine();
-        }
+        int M = in.nextInt(); System.err.println("Nbr of bikes: " + M);
+        int V = in.nextInt(); System.err.println("Min who must survive: " + V);
+        minBikeWhoSurvive = V;
+        String L0 = in.next(); roads.add(L0);
+        System.err.println("nbr de cellX: " + L0.length());
+        System.err.println("max loop: 50");
+        String L1 = in.next(); roads.add(L1);
+        String L2 = in.next(); roads.add(L2);
+        String L3 = in.next(); roads.add(L3);
+        this.lastRoad = roads.size();
+        System.err.println("last road: " + this.lastRoad);
 
         // create map
-        HashMap<Integer, String> earthMap = new HashMap<Integer, String>();
-        for (int i = 0; i < height; i++) {
-            String line = in.nextLine();
-            earthMap.put(i, line);
+        this.map = new char[L0.length()][roads.size()];
+        for (int y = 0; y < roads.size(); y++) {
+            for (int x = 0; x < L0.length(); x++) {
+                this.map[x][y] = roads.get(y).charAt(x);
+            }
+        }
+        this.lastPosx = L0.length();
+
+        // create motorbikes
+        for (int i = 0; i < M; i++) {
+            Bike bike = new Bike();
+            this.bikes.add(bike);
         }
 
-        // order of deploiement
-        System.out.println(this.deploiement(earthMap,board));
-
-        // create sectors
-        List<Sector> sectorList = utils.makeSectors(0, 0);
-        board.setListSecteurs(sectorList);
-
-        // ********* 2 **** Game loop********************************************************************************************:
+        // game loop
         while (true) {
-            boolean fireTorpedoFollowingOppTorp = false;
-            boolean fireFollowingTorpedoFeedback = false;
-            boolean lunchSonar = false;
-            boolean fireFollowingSonarFeedback = false;
-            boolean moveNextOnSilence = false;
-            boolean oppPresenceOnMySector = false;
-            int x = in.nextInt();
-            int y = in.nextInt();
-            Cell myMoveCell = new Cell(x, y, null, null);
-            int myLife = in.nextInt();
-            int oppLife = in.nextInt();
-            opponentSubmarine.setLife(oppLife);
-            int torpedoCooldown = in.nextInt();
-            int sonarCooldown = in.nextInt();
-            int silenceCooldown = in.nextInt();
-            int mineCooldown = in.nextInt();
-            String sonarResult = in.next();
-            if (in.hasNextLine()) {
-                in.nextLine();
-            }
-            String opponentOrders = in.nextLine();
-
-            mySubmarine.updateSubmarine(myId,x,y,myLife,torpedoCooldown,sonarCooldown,silenceCooldown,mineCooldown, sonarResult, opponentOrders);
-            mySubmarine.setSafeListOfCellAroundMe(utils.createSafeCellListAroundMe(mySubmarine, board));
-            //check.
-            System.err.println(mySubmarine.toString());
-
-            isOpponentSentTorpedo = locateOpponent.readIfOpponentSentTorpedo(mySubmarine.getOpponentOrders());
-            List<Cell> torpedorange = torpedo.createCellListTorpedoRange(mySubmarine.getPositionX(), mySubmarine.getPositionY(), board);
-            mySubmarine.setListTorpedoRange(torpedorange);
-
-            // check count fire list in progres
-            if (mySubmarine.getTorpedoFireList() != null) {
-                long countFireList = mySubmarine.getTorpedoFireList().stream().count();
-                // check
-                System.err.println("fire list in progress: " + countFireList);
-            }
-
-            // ********** 3   **** Locate opponent *************************************************************************:
-            // ----------------------------------- after torpedo -----------------------------------------------------
-            if (mySubmarine.getListOpponentPositionAfterTorpedo() != null) { // update with his next move
-                locateOpponent.updateOpponentPresenceListAfterTorpedoWithNewMovement(mySubmarine, board); // record result list on mySubmarine
-            }
-            if (isOpponentSentTorpedo) {
-                locateOpponent.createRangeCellOfOpponentPositionWhenSendTorpedo(mySubmarine, board);
-            }
-            // --------------------------------------------------------------------------------------------------------
-            // check if opponent make surface
-            int opponentSurfaceSector = locateOpponent.checkIfOpponentMakeSurface(mySubmarine, board);
-            if (opponentSurfaceSector != -1) {
-                // compare with my sector position
-                if (opponentSurfaceSector == mySubmarine.getMySector()) {
-                    oppPresenceOnMySector = true;
+            this.simuMap = this.copyMap(this.map);
+            int S = in.nextInt(); // the motorbikes' speed
+            System.err.println("speed: " + S);
+            for (int i = 0; i < M; i++) {
+                this.bikes.get(i).setId(i);
+                int X = in.nextInt(); bikes.get(i).setX(X);
+                int Y = in.nextInt(); bikes.get(i).setY(Y);
+                int A = in.nextInt();
+                if (A == 1) { this.bikes.get(i).setActive(true);}
+                else { this.bikes.get(i).setActive(false);}
+                this.bikes.get(i).setSpeed(S);
+                // display bike on map
+                if (this.bikes.get(i).isActive()) {
+                    if (this.bikes.get(i).getX() < this.lastPosx) {
+                        this.map[bikes.get(i).getX()][bikes.get(i).getY()] = 'B';
+                    }
                 }
-                // todo if not -> move to this sector
-            }
-
-            // check if opponent make silence move
-            boolean opponentMoveSilently = locateOpponent.checkIfOpponentMakeSilence(mySubmarine, board);
-            if (opponentMoveSilently) {
-                // check
-                System.err.println("opponent move silently ");
-                mySubmarine.setOpponentTorpedoExplosion(null);
-                mySubmarine.setTorpedoFireList(null);
-            }
-            // *********** 4 ****** MySubmarine Check **********************************************************************
-            // sonar feedback
-            //check
-            System.err.println("retour sonar: " + mySubmarine.getSonarResult());
-
-            // check mySector position
-            int mySectorId = utils.findMyPositionSector(mySubmarine, board);
-            mySubmarine.setMySector(mySectorId);
-
-            // check if i can fire torpedo following my position (my torpedo loaded and opponent locate list)
-            if (mySubmarine.getTorpedoCooldown() == 0 && mySubmarine.getListOpponentPositionAfterTorpedo() != null) {
-                fireTorpedoFollowingOppTorp = torpedo.canIFireTorpedo(mySubmarine, board);
-            }
-            // check if my torpedo is loaded
-            if (mySubmarine.getTorpedoCooldown() == 0) {
-                loadedTorpedo = true;
-                // check
-                System.err.println("Torpedo loaded and list range ok");
-            }
-            // check if my sonar is loaded
-            if (mySubmarine.getSonarCooldown() == 0) {
-                loadedSonar = true;
-                //check
-                System.err.println("Sonar loaded");
-            }
-            // check if silence is loaded
-            if (mySubmarine.getSilenceCooldown() == 0) {
-                loadedSilence = true;
-                //check
-                System.err.println("Silence loaded");
-                // lunch sonar in my sector
-                if (mySubmarine.getSonarCooldown() == 0) {
-                    lunchSonar = true;
-                    //check
-                    System.err.println("sonar can sent!");
-                }
-            }
-            // add torpedo order if possible
-            if (fireTorpedoFollowingOppTorp && loadedTorpedo) {
-                fireFollowingTorpedoFeedback = true;
-                loadedTorpedo = false;
-            }
-
-            // if mySubmarine life increase 2 point -> next move to silence if possible
-            int lifeDown = utils.compareLifeLoopBefore(mySubmarine);
-            // check
-//            System.err.println("life down: " + lifeDown);
-            if ((lifeDown == 2) && loadedSilence) {
-                // next move to silence
-                moveNextOnSilence = true;
-            }
-
-
-            // ********** 5   **** Action ***********************************************************************************:
-            // think for next move
-            // first solution (random)
-//            String nextMove = move.moveIA1(mySubmarine, board);
-            // Second solution (to a point)
-            String nextMove = move.moveIA3(mySubmarine, board);
-
-            // check if opponent is in my  sector with sonar feedback
-            //check
-            if (mySubmarine.getSonarResult().equals("Y")) {
-                fireFollowingSonarFeedback = true;
-            }
-
-            // if mySubmarin make SURFACE persist last mySubmarine position on object board
-            if (nextMove == "SURFACE") {
-                listCellAlreadyVisited = new ArrayList<>();
-            }
-            listCellAlreadyVisited.add(myMoveCell);
-            board.setListCellAlreadyVisited(listCellAlreadyVisited);
-
-
-            // if my submarine move -> Charge torpedo first and sonar after and silence after
-            if (nextMove != "SURFACE" && !loadedTorpedo && !moveNextOnSilence) {
-                nextMove = nextMove + chargeTorpedo;
-            }
-            if (nextMove != "SURFACE" && loadedTorpedo && !loadedSonar && !moveNextOnSilence) {
-                nextMove = nextMove + chargeSonar;
-            }
-            if (nextMove != "SURFACE" && loadedTorpedo && loadedSonar && loadedSilence && lunchSonar && !moveNextOnSilence) {
-                //check
-                System.err.println("passage sonar order");
-                // lunch sonar
-                nextMove = sentSonar + String.valueOf(mySubmarine.getMySector()) + "|" + nextMove;
-                loadedSonar = false;
-            }
-            if (nextMove != "SURFACE" && loadedTorpedo && loadedSonar && !moveNextOnSilence) {
-                nextMove = nextMove + chargeSilence;
-            }
-            // if important damage try to move silence (for now only one move on silence)
-            if (nextMove != "SURFACE" && moveNextOnSilence && loadedSilence) {
-                //check
-                System.err.println("next move on silence!");
-                moveNextOnSilence = false;
-                loadedSilence = false;
-                nextMove = silence + mySubmarine.getMyNextMove().getCardinalPoint() + 1;
-            }
-            // check
-            System.err.println("Fire Following Torpedo Feedback: " + fireFollowingTorpedoFeedback);
-            System.err.println("Fire Following Sonar Feedback: " + fireFollowingSonarFeedback);
-            System.err.println("Opponent presence on my sector: " + oppPresenceOnMySector);
-            System.err.println("--Torpedo loaded: " + loadedTorpedo + " --");
-
-            // ----------- FIRE ---------- FIRE -------------- FIRE -----------
-            // add fire on move order following opponent fire
-            if (fireFollowingTorpedoFeedback && !fireFollowingSonarFeedback && !moveNextOnSilence) {
-                System.err.println("passage fire following opp torpedo");
-                // get random cell on fireList
-                Cell randomfireTorpedo = utils.randomCellOnList(mySubmarine.getTorpedoFireList());
-                String addfireTorpedoString = "TORPEDO " + randomfireTorpedo.getX() + " " + randomfireTorpedo.getY();
-                String nextMoveFire = addfireTorpedoString + "|" + nextMove;
-                // order of move and fire
-                loadedTorpedo = false;
-                System.err.println("------- FIRE  -----------");
-                System.out.println(nextMoveFire);
-            }
-            // add fire on move order following sonar or opponent presence on my sector
-            else if (fireFollowingSonarFeedback && !fireFollowingTorpedoFeedback && !moveNextOnSilence ||
-                    oppPresenceOnMySector && loadedTorpedo) {
-                System.err.println("passage fire following opp on my sector (sonar or opp SURFACE)");
-                // get random cell on mySector
-                Cell randomfireTorpedo = torpedo.createPossibilitiCellOnSector(mySubmarine, board);
-                String addfireTorpedoString = "TORPEDO " + randomfireTorpedo.getX() + " " + randomfireTorpedo.getY();
-                String nextMoveFire = addfireTorpedoString + "|" + nextMove;
-
-                // update lifeLoopBefore
-                mySubmarine.setLifeLoopBefore(mySubmarine.getLife());
-                // order of move and fire
-                loadedTorpedo = false;
-                System.err.println("------- FIRE  -----------");
-                System.out.println(nextMoveFire);
 
             }
-            // -----------JUST MOVE  ---------- JUST MOVE -------------- JUST MOVE -----------
-            else {
-                // update lifeLoopBefore
-                mySubmarine.setLifeLoopBefore(mySubmarine.getLife());
-                // order for move
-                System.out.println(nextMove);
-            }
 
-            // print submarines info
-//            System.err.println("My submarine: " + mySubmarine.toString());
-//            System.err.println("Opponent submarine: " + opponentSubmarine.toString());
+            // resolving puzzle
+            displayMap(map);
+            // create all orders combination -> 5 words and 5 turns
+            if (loop == 0) {
+                this.createCombinationForSimuOrders();
+                this.simuUnit = new SimuUnit(this.simuOrders); // creation d'une simuUnit
+            }
+            // TODO simulation down is NOK -> quand y a du speed il ne doit pas choisir de descendre quand il y a un trou a x+1
+            // simulation:
+            // je simule un ordre tous les ordres pour trouver la meilleure
+            this.simulateAllOrders();
+            // order out:
+            System.out.println(this.bestOrder);
+            loop++;
         }
     }
 
-    public String deploiement(HashMap earthMap, Board board) {
-        deploy = new Deploy();
+    public void displayMap(char[][] map) {
+        for (int y = 0; y < map[0].length; y++) {
+            String line = "";
+            for (int x = 0; x < map.length; x++) {
+                line += map[x][y];
+            }
+            System.err.println(line);
+            line = "";
+        }
+    }
 
-        deploy.displayEarthAnalysis(earthMap);
-        deploy.recordEarthCellOnBoard(earthMap, board);
+    public char[][] copyMap(char[][] map) {
+        char[][] copyArray = new char[map.length][map[0].length];
 
-        return deploy.deploy1(earthMap);
+        for (int y = 0; y < copyArray[0].length; y++) {
+            for (int x = 0; x < copyArray.length; x++) {
+                copyArray[x][y] = map[x][y];
+            }
+        }
+        return copyArray;
+    }
+
+    public void createCombinationForSimuOrders() {
+        String combination = "";
+        String nbrDigitNok;
+        String nbrWithGoodNbrOfDigit;
+        List<String> listCombinationTotalNbrStr = new ArrayList<>(); // all combination number
+        int combTotal = (int) Math.pow(5, 5);
+
+        combTotal -= 1;
+        //convert on base 5
+        do {
+            combination = intToBase(combTotal, 5);
+            listCombinationTotalNbrStr.add(combination);
+            combTotal--;
+
+        } while (combTotal > 0);
+        listCombinationTotalNbrStr.add("0"); // add last combination 0
+
+        // add 0 on combination with nbr of digit < 5
+        for (int i = 0; i < listCombinationTotalNbrStr.size(); i++) {
+            nbrDigitNok = listCombinationTotalNbrStr.get(i);
+            nbrWithGoodNbrOfDigit = completeStringFollowingNbrDigit(nbrDigitNok);
+            listCombinationTotalNbrStr.set(i, nbrWithGoodNbrOfDigit);
+        }
+
+        // convert combination number on orders words
+        for (int i = 0; i < listCombinationTotalNbrStr.size(); i++) {
+            List<String> orderList = new ArrayList<>();
+            for (int j = 0; j < listCombinationTotalNbrStr.get(i).length(); j++) {
+                char c = listCombinationTotalNbrStr.get(i).charAt(j);
+                if (c == '0') { orderList.add("SPEED"); }
+                if (c == '1') { orderList.add("SLOW"); }
+                if (c == '2') { orderList.add("JUMP"); }
+                if (c == '3') { orderList.add("UP"); }
+                if (c == '4') { orderList.add("DOWN"); }
+            }
+            this.simuOrders.add(orderList);
+        }
+        // test:
+        System.err.println("simuOrders created: " + this.simuOrders.stream().count());
+    }
+
+    public String intToBase(int pEntier, int pBase) {
+
+        int nbr = pEntier;
+        int rest;
+        String resultTemp = "";
+        String resultFinal = "";
+
+        do {
+            rest = nbr % pBase;
+            resultTemp = resultTemp + rest;
+            nbr = nbr / pBase;
+        } while (nbr > 0);
+
+        //j'inverse le string resultFinal
+        int decompte = resultTemp.length() - 1;
+        for (int i = decompte; i >= 0; i--) {
+            char digit = resultTemp.charAt(i);
+            resultFinal = resultFinal + digit;
+        }
+
+        return resultFinal;
+    }
+
+    protected String completeStringFollowingNbrDigit(String pIn) {
+
+        int nbrDigit = 5;
+
+        //variables
+        String nbrStr = pIn;
+        String nbrMaxStr = "1";
+        String nbrFinalStr = "";
+
+        // je trouve le chiffre minimum avec le nombre de digit
+        for (int i = 0; i < (nbrDigit - 1); i++) {
+            nbrMaxStr = nbrMaxStr + "0";
+        }
+        Integer nbrMax = Integer.parseInt(nbrMaxStr);
+
+        // je complete les String avec pas assez de digit
+
+        // je compte le nombre de digit
+        int countNbrDigit = 0;
+
+        for (int i = 0; i < nbrStr.length(); i++) {
+            countNbrDigit++;
+        }
+        // il faut donc rajouter combien de zero
+        int nbrzero = nbrDigit - countNbrDigit;
+
+        // je crée les zero manquant
+        for (int i = 0; i < nbrzero; i++) {
+            nbrFinalStr = nbrFinalStr + "0";
+        }
+
+        // je rajoute mon pIn
+        nbrFinalStr = nbrFinalStr + nbrStr;
+
+        return nbrFinalStr;
+    }
+
+    public void simulateAllOrders()  {
+        int countSimuOrder = 0;
+        // set position on simuMap
+        for (int k = 0; k < this.bikes.size(); k++) {
+            if (this.bikes.get(k).getX() < this.lastPosx) {
+                this.simuMap[this.bikes.get(k).getX()][this.bikes.get(k).getY()] = 'B';
+            }
+        }
+        for (int i = 0; i < this.simuOrders.size(); i++) { // simulation avec la liste de tous les ordres
+            //for (int i = 2031; i < 2032; i++) { // simulation avec la liste de tous les ordres
+
+                // init
+            this.simuMap = this.copyMap(map);
+            this.simuBikes = new ArrayList<>();
+            for (Bike bike : this.bikes) {
+                Bike newBike = new Bike();
+                newBike.setId(bike.getId());
+                newBike.setX(bike.getX());
+                newBike.setY(bike.getY());
+                newBike.setActive(true);
+                newBike.setInvalidOrder(false);
+                newBike.setSpeed(bike.getSpeed());
+                this.simuBikes.add(newBike);
+            }
+            //System.err.println("simu bike0 x: " + this.simuBikes.get(0).getX());
+            //System.err.println("simu bike0 info: " + this.simuBikes.get(0).toString());
+
+            countSimuOrder++;
+            int score = 0;
+
+            // check display on map
+            //System.err.println("map before turn");
+            //this.displayMap(this.simuMap);
+
+            //System.err.println("simu orders: " + this.simuOrders.get(i).toString());
+
+            for (int j = 0; j < 5; j++) { // simulation avec 5 ordres
+                String order = this.simuOrders.get(i).get(j);
+                //System.err.println("simu order" + j + " :" + order);
+
+
+                if (order.equals("SPEED") || order.equals("SLOW")) {
+                    this.simuSpeed(order);
+                }
+
+                if (order.equals("JUMP")) {
+                    this.simuJump();
+                }
+
+
+                if (order.equals("DOWN")) {
+                    this.simuDown();
+                }
+
+                if (order.equals("UP")) {
+                    for (Bike bike: this.simuBikes) {
+                        bike.setInvalidOrder(true);
+                    }
+                }
+
+
+                // calculate score
+                for (Bike bike : this.simuBikes) {
+                    if (bike.isInvalidOrder()) {
+                        score = -10;
+                    }
+                    if (bike.isActive() && bike.getSpeed() > 0) {
+                        score = score + bike.getX();
+                    }
+
+                    if (!bike.isActive()) {
+                        score = score - 50;
+                    }
+                    // TODO check for one comb
+                    if (i == 0) {
+                        System.err.println("simu order" + j + " bike" + bike.getId() + " is active -> " + bike.isActive());
+                        System.err.println(bike.toString());
+                    }
+                }
+                // check display on map
+                //System.err.println("map after turn");
+                //this.displayMap(this.simuMap);
+
+            }
+            this.simuUnit.setScore(i, score);
+            //System.err.println("check score for" + i + " :" + this.simuUnit.getScores().get(i));
+
+
+        }
+        // check
+        System.err.println("count simu order: " + countSimuOrder);
+
+        // find best score
+        int indexOfBestScore = this.findBestScore();
+        System.err.println("best order: " + this.simuOrders.get(indexOfBestScore).toString() + " -> N°:" + indexOfBestScore);
+        System.err.println("best score: " + this.simuUnit.getScores().get(indexOfBestScore));
+        // System.err.println("score for 0: " + this.simuUnit.getScores().get(0));
+
+
+
+        this.bestOrder = simuOrders.get(indexOfBestScore).get(0);
+
+    }
+
+    public int findBestScore() {
+        int score = -10000;
+        int index = 0;
+        for (int i = 0; i < this.simuUnit.getScores().size() - 1; i++) {
+            if (this.simuUnit.getScores().get(i) > score) {
+                score = this.simuUnit.getScores().get(i);
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    public void simuSpeed(String order) {
+        for (int i = 0; i < this.simuBikes.size(); i++) {
+            if (this.simuBikes.get(i).isActive()) {
+                int speed = this.simuBikes.get(i).getSpeed();
+                if (order.equals("SPEED")) {
+                    speed++;
+                    this.simuBikes.get(i).setSpeed(speed);
+                }
+                if (order.equals("SLOW")) {
+                    if (this.simuBikes.get(i).getSpeed() > 0) {
+                        speed--;
+                        this.simuBikes.get(i).setSpeed(speed);
+                    }
+                }
+                Cell position = new Cell(this.simuBikes.get(i).getX(), this.simuBikes.get(i).getY());
+
+                // set next position on bike
+                if (speed == 0) {
+                    this.simuBikes.get(i).setX(position.getX());
+                    this.simuBikes.get(i).setY(position.getY());
+                } else {
+                    this.simuBikes.get(i).setX(this.simuBikes.get(i).getX() + speed );
+                    this.simuBikes.get(i).setY(this.simuBikes.get(i).getY());
+                }
+                // check invalid order -> speed
+                if (this.simuBikes.get(i).getSpeed() > 10) { this.simuBikes.get(i).setInvalidOrder(true); }
+                if (this.simuBikes.get(i).getSpeed() <= 0) { this.simuBikes.get(i).setInvalidOrder(true); }
+
+                // check if there is a hole
+                if (this.simuBikes.get(i).getX() < map.length) {
+                    this.simuBikes.get(i).setActive(this.simulationCheckIfBikeIsActive(position,
+                            new Cell(this.simuBikes.get(i).getX(), this.simuBikes.get(i).getY())));
+
+                    // test off
+                    // set invalid order
+                    this.simulationCheckInvalidPos(this.lastRoad, order); // TODO possibility of bug -> see invalid order speed
+                    // set next position on simuMap
+                    String speedStr = String.valueOf(this.simuBikes.get(i).getSpeed());
+                    simuMap[this.simuBikes.get(i).getX()][this.simuBikes.get(i).getY()] = speedStr.charAt(0);
+                }
+
+            }
+        }
+    }
+
+    public void simuJump() {
+        for (int i = 0; i < this.simuBikes.size(); i++) {
+            if (this.simuBikes.get(i).isActive()) {
+                int speed = this.simuBikes.get(i).getSpeed();
+                this.simuBikes.get(i).setX(this.simuBikes.get(i).getX() + speed);
+                this.simuBikes.get(i).setY(this.simuBikes.get(i).getY());
+                if (this.simuBikes.get(i).getX() < map.length) {
+                    // check if there is hole on reception
+                    if (this.map[this.simuBikes.get(i).getX()][this.simuBikes.get(i).getY()] == '0') {
+                        this.simuBikes.get(i).setActive(false);
+                    }
+                    // set next position on simuMap
+                    String speedStr = String.valueOf(this.simuBikes.get(i).getSpeed());
+                    simuMap[this.simuBikes.get(i).getX()][this.simuBikes.get(i).getY()] = speedStr.charAt(0);
+                }
+
+            }
+        }
+    }
+
+    public void simuDown() {
+        for (int i = 0; i < this.simuBikes.size(); i++) {
+            if (this.simuBikes.get(i).isActive() && (this.simuBikes.get(i).getY() + 1 < this.lastRoad - 1) ) { //active and not on last road
+                int speed = this.simuBikes.get(i).getSpeed();
+                // check if there is hole on simuMap during this move
+                // y check
+                if (speed > 0) {
+                    for (int j = 1; j <= speed; j++) {
+                        if (this.simuBikes.get(i).getX() + j < this.lastPosx) {
+                            // on x
+                            if (this.simuMap[this.simuBikes.get(i).getX() + j][this.simuBikes.get(i).getY()] == 'O') {
+                                this.simuBikes.get(i).setActive(false);
+                            }
+                            // on y
+                            if (this.simuBikes.get(i).getY() + 1 < this.lastRoad) {
+                                if (this.simuMap[this.simuBikes.get(i).getX() + j][this.simuBikes.get(i).getY() + 1] == '0') {
+                                    this.simuBikes.get(i).setActive(false);
+                                }
+                            }
+                        } else {
+                            this.simuBikes.get(i).setInvalidOrder(true);
+                        }
+
+                    }
+                }
+                // set new simu pos
+                this.simuBikes.get(i).setY(this.simuBikes.get(i).getY() + 1);
+                this.simuBikes.get(i).setX(this.simuBikes.get(i).getX() + speed);
+            } else {
+                this.simuBikes.get(i).setInvalidOrder(true);
+            }
+        }
+    }
+
+    public boolean simulationCheckIfBikeIsActive(Cell beginPos, Cell endPos) {
+        int diffOnCellX = endPos.getX() - beginPos.getX();
+
+        for (int i = 0; i <= diffOnCellX; i++) {
+            if (this.map[beginPos.getX() + i][beginPos.getY()] == '0') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void simulationCheckInvalidPos(int lastRoad, String order) {
+        boolean bikeOnFirstLine = false;
+        for (int i = 0; i < this.simuBikes.size(); i++) {
+            if (this.simuBikes.get(i).getY() == 0 && order.equals("UP")) { bikeOnFirstLine = true; }
+        }
+        if (bikeOnFirstLine) {
+            for (Bike bike : this.simuBikes) {
+                bike.setInvalidOrder(true);
+            }
+        }
+
+        boolean bikeOnLastLine = false;
+        for (int i = 0; i < this.simuBikes.size(); i++) {
+            if (this.simuBikes.get(i).getY() == lastRoad && order.equals("DOWN")) { bikeOnLastLine = true; }
+        }
+        if (bikeOnLastLine) {
+            for (Bike bike : this.simuBikes) {
+                bike.setInvalidOrder(true);
+            }
+        }
     }
 }
+
