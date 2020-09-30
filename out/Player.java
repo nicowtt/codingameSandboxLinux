@@ -1,1517 +1,602 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
+import java.math.*;
 import java.util.HashMap;
 import java.util.List;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
-import java.util.*;
-            // if important damage try to move silence (for now only one move on silence)
-import java.util.List;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import static java.lang.StrictMath.abs;
 
-class Board {
-    private int nbrCellX;
-    private int nbrCellY;
-    private List<Cell> listCellEarth;
-    private List<Cell> listCellAlreadyVisited;
-    private List<Sector> listSecteurs;
+class Bike extends Cell{
+    private int id;
+    private int speed;
+    private boolean active;
+    private boolean invalidOrder;
+    private Cell nextCell;
 
-    // constructor
-    public Board() {
+    public Bike() {
+        this.invalidOrder = false;
     }
 
-    public Board(int nbrCellX, int nbrCellY, List<Cell> listCellEarth, List<Cell> listCellAlreadyVisited, List<Sector> listSecteurs) {
-        this.nbrCellX = nbrCellX;
-        this.nbrCellY = nbrCellY;
-        this.listCellEarth = listCellEarth;
-        this.listCellAlreadyVisited = listCellAlreadyVisited;
-        this.listSecteurs = listSecteurs;
-    }
+    public void setId(int id) { this.id = id; }
+    public void setSpeed(int speed) { this.speed = speed; }
+    public void setActive(boolean active) { this.active = active; }
+    public void setInvalidOrder(boolean invalidOrder) { this.invalidOrder = invalidOrder; }
+    public void setNextCell(Cell nextCell) { this.nextCell = nextCell; }
 
-    // getters setters
-    public int getNbrCellX() {
-        return nbrCellX;
-    }
-    public void setNbrCellX(int nbrCellX) {
-        this.nbrCellX = nbrCellX;
-    }
-    public int getNbrCellY() {
-        return nbrCellY;
-    }
-    public void setNbrCellY(int nbrCellY) {
-        this.nbrCellY = nbrCellY;
-    }
-    public List<Cell> getListCellEarth() {
-        return listCellEarth;
-    }
-    public void setListCellEarth(List<Cell> listCellEarth) {
-        this.listCellEarth = listCellEarth;
-    }
-    public List<Cell> getListCellAlreadyVisited() {
-        return listCellAlreadyVisited;
-    }
-    public void setListCellAlreadyVisited(List<Cell> listCellAlreadyVisited) {
-        this.listCellAlreadyVisited = listCellAlreadyVisited;
-    }
-    public List<Sector> getListSecteurs() {
-        return listSecteurs;
-    }
-    public void setListSecteurs(List<Sector> listSecteurs) {
-        this.listSecteurs = listSecteurs;
+    public int getId() { return id; }
+    public int getSpeed() { return speed; }
+    public boolean isActive() { return active; }
+    public boolean isInvalidOrder() { return invalidOrder; }
+    public Cell getNextCell() { return nextCell; }
+
+    // methods
+    public Cell nextCellMove(String indication) {
+        if (indication.equals("SPEED")) {
+            if (speed == 0) {
+                return new Cell(this.getX() + 1, this.getY());
+            } else {
+                return new Cell(this.getX() + speed + 1, this.getY());
+            }
+        }
+        if (indication.equals("WAIT")) {
+            if (speed == 0) {
+                return new Cell(this.getX(), this.getY());
+            } else {
+                return new Cell(this.getX() + speed, this.getY());
+            }
+        }
+        if (indication.equals("SLOW")) {
+            if (speed == 0) {
+                return new Cell(this.getX() - 1, this.getY());
+            } else {
+                return new Cell(this.getX() + speed - 1, this.getY());
+            }
+        }
+        return new Cell();
     }
 
     // to string
     @Override
     public String toString() {
-        return "Board{" +
-                "nbrCellX=" + nbrCellX +
-                ", nbrCellY=" + nbrCellY +
-                ", listCellEarth=" + listCellEarth +
-                ", listCellAlreadyVisited=" + listCellAlreadyVisited +
-                ", listSecteurs=" + listSecteurs +
+        return "Bike{" +
+                "id=" + id +
+                ", speed=" + speed +
+                ", active=" + active +
+                ", invalidOrder=" + invalidOrder +
+                ", nextCell=" + nextCell +
                 '}';
     }
-
-    public void updateBoard(int nbrCellX, int nbrCellY) {
-        this.setNbrCellX(nbrCellX);
-        this.setNbrCellY(nbrCellY);
-    }
 }
+
 class Cell {
     private int x;
     private int y;
-    private String cardinalPoint;
-    private Integer distanceToDestinationCell;
 
-    // constructor
-    public Cell() {
-    }
+    public Cell() {}
 
-    public Cell(int x, int y, String cardinalPoint, Integer distanceToDestinationCell) {
+    public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        this.cardinalPoint = cardinalPoint;
-        this.distanceToDestinationCell = distanceToDestinationCell;
     }
 
-    // getters setters
-    public int getX() {
-        return x;
-    }
-    public void setX(int x) {
-        this.x = x;
-    }
-    public int getY() {
-        return y;
-    }
-    public void setY(int y) {
-        this.y = y;
-    }
-    public String getCardinalPoint() {
-        return cardinalPoint;
-    }
-    public void setCardinalPoint(String cardinalPoint) {
-        this.cardinalPoint = cardinalPoint;
-    }
-    public Integer getDistanceToDestinationCell() {
-        return distanceToDestinationCell;
-    }
-    public void setDistanceToDestinationCell(Integer distanceToDestinationCell) {
-        this.distanceToDestinationCell = distanceToDestinationCell;
-    }
+    public void setX(int x) { this.x = x; }
+    public void setY(int y) { this.y = y; }
 
-    // to string
-    @Override
+    public int getX() { return x; }
+    public int getY() { return y; }
+
     public String toString() {
-        return "Cell{" +
-                "x=" + x +
-                ", y=" + y +
-                ", cardinalPoint='" + cardinalPoint + '\'' +
-                ", distanceToDestinationCell=" + distanceToDestinationCell +
-                '}';
-    }
-}
-
-/**
- * to deploy in real water!
- */
-class Deploy {
-    /**
-     * test for analyse map
-     */
-    public void displayEarthAnalysis(HashMap<Integer, String> earthMap) {
-        for (int i = 0; i < 15; i++) {
-            String value = earthMap.get(i);
-            // check
-//            System.err.println(value);
-        }
+        return "{" +
+                "x: " + x +
+                " y: " + y +
+                "]";
     }
 
-    /**
-     * Deploy corner bottom left or bottom Middle
-     */
-    public String deploy1(HashMap<Integer, String> earthMap) {
-        // 1 deploy corner bottom left or middle bottom if there is earth
-        String line14 = earthMap.get(14);
-        char deployPoint = line14.charAt(0);
-        if (deployPoint == '.') { return "0 14"; }
-        else { return "7 14"; }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        return result;
     }
 
-    /**
-     * Deploy corner up left or Middle up
-     */
-    public String deploy2(HashMap<Integer, String> earthMap) {
-        String line0 = earthMap.get(0);
-        char deployPoint = line0.charAt(0);
-        if (deployPoint == '.') { return "0 0"; }
-        else { return "7 0"; }
-    }
-
-    public Cell recordDeploiementCell(String deploy) {
-        Cell deployCell = new Cell();
-        String space = " ";
-        String positions[] = deploy.split(space);
-        String posXstring = positions[0];
-        String posYstring =  positions[1];
-        deployCell.setX(Integer.parseInt(posXstring));
-        deployCell.setY(Integer.parseInt(posYstring));
-        return deployCell;
-    }
-
-    public void recordEarthCellOnBoard(HashMap<Integer, String> earthMap, Board board) {
-        List<Cell> listCellContainsEarth = new ArrayList<>();
-        char oneChar;
-        for (int i = 0; i < earthMap.size(); i++) {
-            String line = earthMap.get(i);
-            for (int j = 0; j < line.length(); j++) {
-                oneChar = line.charAt(j);
-                if (oneChar == 'x') {
-                    Cell earthCell = new Cell(j,i, null,null);
-                    // add earthCell on list of earth on board object
-                    listCellContainsEarth.add(earthCell);
-                    board.setListCellEarth(listCellContainsEarth);
-                }
-            }
-        }
-        // check
-//         System.err.println("list earth on board " + listCellContainsEarth.toString());
-    }
-}
-
-class LocateOpponent {
-    Utils utils = new Utils();
-    Torpedo torpedo = new Torpedo();
-
-    /**
-     * Next opponent move
-     * @param opponentOrders
-     * @return
-     */
-    public String readOpponentMove(String opponentOrders) {
-        String[] moveOrders = opponentOrders.split("MOVE ");
-//        int count = 0;
-//            for (String a: moveOrders) {
-//                System.err.println("move " + count + ":" + a);
-//                count++;
-//            }
-        // check
-        if (moveOrders.length > 1) {
-            //check
-            System.err.println("opponent order move: " + moveOrders[1]);
-            String opponentMove = moveOrders[1];
-            return opponentMove;
-        } else {
-            return "opponent move unknown";
-        }
-    }
-
-    public boolean readIfOpponentSentTorpedo(String opponentOrders) {
-        String[] torpedoCells = opponentOrders.split("TORPEDO ");
-        // check
-        if (torpedoCells.length > 1) {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
             return true;
-        } else {
+        if (obj == null)
             return false;
-        }
-    }
-
-    public Cell readOpponentTorpedoCell(String opponentOrders) {
-        Cell opponentTorpedoCell = new Cell();
-
-        // if many opponent word
-        if (opponentOrders.contains("|")) {
-            String[] words = opponentOrders.split("\\|");
-            for (String word:words) {
-                if (word.contains("TORPEDO ")) {
-                    String[] blocks = word.split(" ");
-                    int torpX = Integer.valueOf(blocks[1]);
-                    int torpY = Integer.valueOf(blocks[2]);
-                    opponentTorpedoCell.setX(torpX);
-                    opponentTorpedoCell.setY(torpY);
-                }
-            }
-        } else {
-            if (opponentOrders.contains("TORPEDO ")) {
-                String[] blocks = opponentOrders.split(" ");
-                int torpX = Integer.valueOf(blocks[1]);
-                int torpY = Integer.valueOf(blocks[2]);
-                opponentTorpedoCell.setX(torpX);
-                opponentTorpedoCell.setY(torpY);
-            }
-        }
-
-        // check
-        System.err.println("opponent order Torpedo cell: " + opponentTorpedoCell.toString());
-        return opponentTorpedoCell;
-
-    }
-
-    public void createRangeCellOfOpponentPositionWhenSendTorpedo(Submarine mySubmarine, Board board) {
-
-        // find torpedo explosion cell
-        Cell opponentTorpedoCell = readOpponentTorpedoCell(mySubmarine.getOpponentOrders());
-
-        // record torpedo explosion cell
-        mySubmarine.setOpponentTorpedoExplosion(opponentTorpedoCell);
-
-        // create list of position where opponent is (after he has send torpedo)
-        List<Cell> listPresenceOpponentTorpedo = torpedo.createCellListTorpedoRange(opponentTorpedoCell.getX(), opponentTorpedoCell.getY(),board);
-
-        // record presence opponent list on mySubmarine
-        mySubmarine.setListOpponentPositionAfterTorpedo(listPresenceOpponentTorpedo);
-        // check
-//                System.err.println("opp list with torp: " + listPresenceOpponentTorpedo);
-        long nbrCasePosible = listPresenceOpponentTorpedo.stream().count();
-        System.err.println("opponnent send torp ->: " + nbrCasePosible + " cell position possibility!!");
-
-        // opponent Presence List After Torpedo Update With his next Movement
-//        updateOpponentPresenceListAfterTorpedoWithNewMovement(mySubmarine, board);
-    }
-
-    public void updateOpponentPresenceListAfterTorpedoWithNewMovement(Submarine mySubmarine, Board board) {
-
-        // read opponent next move
-        String opponentNextMove = readOpponentMove(mySubmarine.getOpponentOrders());
-        // if opp order is not silence
-//        if (!opponentNextMove.contains("SILENCE")) {
-//
-//        }
-        // read opponent torpedo explosion cell
-        if (mySubmarine.getOpponentTorpedoExplosion() != null) {
-            Cell opponentTorpedocell = mySubmarine.getOpponentTorpedoExplosion();
-
-            // find torpedo explosion Cell following his next move
-            Cell opponentTorpedoCellAfterMove = utils.findCellWithCardinalPoint(opponentNextMove,opponentTorpedocell.getX(), opponentTorpedocell.getY());
-            // check
-            System.err.println("new cell center range opp : " + opponentTorpedoCellAfterMove.toString());
-
-            // re-center list of presence with opponent next move
-            List<Cell> listNewPresenceOpponentTorpedo = torpedo.createCellListTorpedoRange(opponentTorpedoCellAfterMove.getX(), opponentTorpedoCellAfterMove.getY(),board);
-
-            // re-record new range posibility of opponent presence
-            mySubmarine.setListOpponentPositionAfterTorpedo(listNewPresenceOpponentTorpedo);
-            // check
-//        System.err.println("update opp range list(torpedo): " + mySubmarine.getListOpponentPositionAfterTorpedo().toString());
-
-            // record new torpedo explosion cell
-            mySubmarine.setOpponentTorpedoExplosion(opponentTorpedoCellAfterMove);
-        }
-
-    }
-
-    public int checkIfOpponentMakeSurface(Submarine mySubmarine, Board board) {
-        int opponentSectorNbr = -1;
-        // read opponent next move
-        String opponentNextMove = mySubmarine.getOpponentOrders();
-        if (opponentNextMove.contains("SURFACE")) {
-            // check
-//            System.err.println("passage opp surface ");
-            // get number of opponent sector surface
-            String surfaceSector[] = opponentNextMove.split("SURFACE ");
-            opponentSectorNbr = Integer.valueOf(surfaceSector[1]);
-        }
-        // check
-//        System.err.println("opponent surface on sector: " + opponentSectorNbr);
-        return opponentSectorNbr;
-    }
-
-    public boolean checkIfOpponentMakeSilence(Submarine mySubmarine, Board board) {
-        String opponentOrder = mySubmarine.getOpponentOrders();
-        if (opponentOrder.contains("SILENCE")) {
-            return true;
-        }
-        else return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Cell other = (Cell) obj;
+        if (x != other.x)
+            return false;
+        if (y != other.y)
+            return false;
+        return true;
     }
 }
 
-/**
- * For move without crash
- */
-class Move {
-    Utils utils = new Utils();
-    private int destinationSector = 4; // 5 in fact
-
-    /**
-     * cell random move
-     */
-    public String moveIA1(Submarine mySubmarine, Board board) {
-        System.err.println("move IA1 in progress ");
-        // list of future move (4 cell auround mySubmarine position)
-        List<Cell> listAllPossibleMove = getListOfPossibleMove(mySubmarine);
-
-        // remove cells out of map
-        List<Cell> listWithoutMapLimit = utils.removeEndOfMap(listAllPossibleMove, board);
-
-        // remove earth on last list
-        List<Cell> listWithoutMapLimitAndEarth = utils.removeEarthCell(listWithoutMapLimit, board);
-
-        // remove alreadyVisit cell on last list
-        List<Cell> listWithoutMapLimitEarthAndAlreadyVisited = utils.removeAlreadyVisitedCell(listWithoutMapLimitAndEarth, board);
-
-        // random on cell with last list
-        if (!listWithoutMapLimitEarthAndAlreadyVisited.isEmpty()) {
-            Cell cellToMoveRandom = utils.randomCellOnList(listWithoutMapLimitEarthAndAlreadyVisited);
-            // record my next move
-            mySubmarine.setMyNextMove(cellToMoveRandom);
-
-            // move to random cell
-            if (cellToMoveRandom.getX() != -10) {
-                if (cellToMoveRandom.getCardinalPoint() == "N ") { return "MOVE " + cellToMoveRandom.getCardinalPoint(); }
-                if (cellToMoveRandom.getCardinalPoint() == "E ") { return "MOVE " + cellToMoveRandom.getCardinalPoint(); }
-                if (cellToMoveRandom.getCardinalPoint() == "W ") { return "MOVE " + cellToMoveRandom.getCardinalPoint(); }
-                if (cellToMoveRandom.getCardinalPoint() == "S ") { return "MOVE " + cellToMoveRandom.getCardinalPoint(); }
-            }
-        }
-        return "SURFACE";
-    }
-
-    /**
-     * balayage
-     * @param mySubmarine
-     * @param board
-     * @return
-     */
-    public String moveIA2(Submarine mySubmarine, Board board) {
-        System.err.println("move IA2 in progress ");
-        Cell myPositionCell = new Cell(mySubmarine.getPositionX(), mySubmarine.getPositionY(), null, null);
-        Cell destinationCell = new Cell(0,14,null,null);
-
-        // list of future move (4 cell auround mySubmarine position)
-        List<Cell> listAllPossibleMove = getListOfPossibleMove(mySubmarine);
-
-        // remove cells out of map
-        List<Cell> listWithoutMapLimit = utils.removeEndOfMap(listAllPossibleMove, board);
-
-        // remove earth on last list
-        List<Cell> listWithoutMapLimitAndEarth = utils.removeEarthCell(listWithoutMapLimit, board);
-
-        // remove alreadyVisit cell on last list
-        List<Cell> listWithoutMapLimitEarthAndAlreadyVisited = utils.removeAlreadyVisitedCell(listWithoutMapLimitAndEarth, board);
-
-        // to each cell add distance for destination
-        for (Cell cell: listWithoutMapLimitEarthAndAlreadyVisited) {
-            Integer distance = utils.distanceFromCell(myPositionCell, destinationCell);
-            cell.setDistanceToDestinationCell(distance);
-        }
-        // calc better path
-
-        if (!listWithoutMapLimitEarthAndAlreadyVisited.isEmpty()) {
-            Comparator<Cell> comparator = Comparator.comparing( Cell::getDistanceToDestinationCell);
-            Cell betterPathCell = listWithoutMapLimitEarthAndAlreadyVisited.stream()
-                    .min(comparator).get();
-            // check
-//            for (Cell cell:listWithoutMapLimitEarthAndAlreadyVisited ) {
-//                System.err.println("test: " + cell.toString());
-//            }
-            // record my next move
-            mySubmarine.setMyNextMove(betterPathCell);
-            return "MOVE " + betterPathCell.getCardinalPoint();
-        } else {
-            return "SURFACE";
-        }
-
-    }
-
-    /**
-     * sector random move
-     * @param mySubmarine
-     * @param board
-     * @return
-     */
-    public String moveIA3(Submarine mySubmarine, Board board) {
-        Random rand = new Random();
-        // limit for random 9 -> all secteur
-        int max = 8;
-        int min = 0;
-        System.err.println("move IA3 in progress ");
-        mySubmarine.setDestinationSector(destinationSector);
-
-        // check
-        System.err.println("my submarine destination sector is: " + (mySubmarine.getDestinationSector()+1));
-        // check
-        System.err.println("my submarine is on sector: " + (mySubmarine.getMySector()));
-
-        // random sector if destination is ok
-        if ((mySubmarine.getDestinationSector()+1) == mySubmarine.getMySector()) {
-            destinationSector = rand.nextInt(max - min + 1) + min;
-        }
-
-        // get list of cell on this sector
-        List<Cell> listSectorDestination = board.getListSecteurs().get(destinationSector).getListCell();
-
-        // get a cell in destination sector
-        Cell destinationCell = utils.randomCellOnList(listSectorDestination);
-        String goToDestination = moveToOneCell(mySubmarine, board, destinationCell);
-        // check
-//            System.err.println("i move to " + destinationCell);
-        return goToDestination;
-    }
-
-    public Cell getOneCellOnrandomSector(Submarine mySubmarine, Board board) {
-        List<Sector> listOfAllSector = board.getListSecteurs();
-        Random rand = new Random();
-
-        // get random sector
-        int max = listOfAllSector.size() - 1;
-        int min = 0;
-        int randomSector = rand.nextInt(max - min + 1) + min;
-
-        // get cell list of sector
-        Sector randomSecteur = board.getListSecteurs().get(randomSector);
-        // check
-        System.err.println("i move to sector " + randomSecteur.getId());
-        // record sector destination
-        mySubmarine.setDestinationSector(randomSecteur.getId());
-        // get random cell on it
-        Cell randomCellOnSector = utils.randomCellOnList(randomSecteur.getListCell());
-        return randomCellOnSector;
-    }
-
-    public String moveToOneCell(Submarine mySubmarine, Board board, Cell destinationCell) {
-        Cell myPositionCell = new Cell(mySubmarine.getPositionX(), mySubmarine.getPositionY(), null, null);
-
-        // list of future move (4 cell auround mySubmarine position)
-        List<Cell> listAllPossibleMove = getListOfPossibleMove(mySubmarine);
-
-        // remove cells out of map
-        List<Cell> listWithoutMapLimit = utils.removeEndOfMap(listAllPossibleMove, board);
-
-        // remove earth on last list
-        List<Cell> listWithoutMapLimitAndEarth = utils.removeEarthCell(listWithoutMapLimit, board);
-
-        // remove alreadyVisit cell on last list
-        List<Cell> listWithoutMapLimitEarthAndAlreadyVisited = utils.removeAlreadyVisitedCell(listWithoutMapLimitAndEarth, board);
-
-        // to each cell add distance for destination
-        for (Cell cell: listWithoutMapLimitEarthAndAlreadyVisited) {
-            Integer distance = utils.distanceFromCell(myPositionCell, destinationCell);
-            cell.setDistanceToDestinationCell(distance);
-        }
-        // calc better path
-        if (!listWithoutMapLimitEarthAndAlreadyVisited.isEmpty()) {
-            // add distance with destination
-            Cell betterPathCell = new Cell();
-            int distance;
-            for (int i = 0; i < listWithoutMapLimitEarthAndAlreadyVisited.size(); i++) {
-                distance = utils.distanceFromCell(listWithoutMapLimitEarthAndAlreadyVisited.get(i), destinationCell);
-                listWithoutMapLimitEarthAndAlreadyVisited.get(i).setDistanceToDestinationCell(distance);
-//                System.err.println("distance " + distance);
-            }
-            // choice the min distance
-            int min = 2000;
-            for (int i = 0; i < listWithoutMapLimitEarthAndAlreadyVisited.size(); i++) {
-                if (listWithoutMapLimitEarthAndAlreadyVisited.get(i).getDistanceToDestinationCell() < min) {
-                    min = listWithoutMapLimitEarthAndAlreadyVisited.get(i).getDistanceToDestinationCell();
-                    betterPathCell = listWithoutMapLimitEarthAndAlreadyVisited.get(i);
-                }
-            }
-            // check
-//            System.err.println("min " + min);
-            // record my next move
-            mySubmarine.setMyNextMove(betterPathCell);
-            return "MOVE " + betterPathCell.getCardinalPoint();
-        } else {
-            return "SURFACE";
-        }
-    }
-
-    public List<Cell> getListOfPossibleMove(Submarine mySubmarine) {
-        // list of future move (4 cell auround mySubmarine position)
-        List<Cell> listAllPossibleMove = new ArrayList<>();
-
-        // create list of possible move cell
-        Cell northCell = new Cell();
-        northCell.setX(mySubmarine.getPositionX());
-        northCell.setY(mySubmarine.getPositionY() - 1);
-        northCell.setCardinalPoint("N ");
-        listAllPossibleMove.add(northCell);
-
-        Cell southCell = new Cell();
-        southCell.setX(mySubmarine.getPositionX());
-        southCell.setY(mySubmarine.getPositionY() + 1);
-        southCell.setCardinalPoint("S ");
-        listAllPossibleMove.add(southCell);
-
-        Cell westCell = new Cell();
-        westCell.setX(mySubmarine.getPositionX() - 1);
-        westCell.setY(mySubmarine.getPositionY());
-        westCell.setCardinalPoint("W ");
-        listAllPossibleMove.add(westCell);
-
-        Cell estCell = new Cell();
-        estCell.setX(mySubmarine.getPositionX() + 1);
-        estCell.setY(mySubmarine.getPositionY());
-        estCell.setCardinalPoint("E ");
-        listAllPossibleMove.add(estCell);
-
-        return listAllPossibleMove;
-    }
-}
 
 /**
  * Auto-generated code below aims at helping you parse
  * the standard input according to the problem statement.
  **/
 class Player {
-    private Deploy deploy;
-    private Move move;
-    private Submarine mySubmarine;
-    private Submarine opponentSubmarine;
-    private Board board;
-    private Utils utils;
-    private Torpedo torpedo;
-    private LocateOpponent locateOpponent;
-    private List<Cell> listCellAlreadyVisited;
+
+    private List<List<String>> simuOrders = new ArrayList<>();
+    private char[][] simuMap;
+    private char[][] map;
+    private SimuUnit simuUnit;
+    private int lastRoad;
+    private String bestOrder;
+    List<Bike> bikes;
+    List<Bike> simuBikes;
+    private int lastPosx;
+    private int minBikeWhoSurvive;
 
     public static void main(String args[]) {
-      new Player().run();
+        new Player().run();
     }
-
     public void run() {
-        move = new Move();
-        mySubmarine = new Submarine();
-        opponentSubmarine = new Submarine();
-        board = new Board();
-        utils = new Utils();
-        torpedo = new Torpedo();
-        locateOpponent = new LocateOpponent();
-        listCellAlreadyVisited = new ArrayList<>();
-
-        String chargeSonar = "SONAR";
-        String chargeTorpedo = "TORPEDO";
-        String chargeSilence = "SILENCE";
-        String sentSonar = "SONAR ";
-        String silence = "SILENCE ";
-        boolean isOpponentSentTorpedo = false;
-        boolean loadedTorpedo = false;
-        boolean loadedSonar = false;
-        boolean loadedSilence = false;
-
+        List<String> roads = new ArrayList<>();
+        this.bikes = new ArrayList<>();
+        int loop = 0;
         Scanner in = new Scanner(System.in);
-        int width = in.nextInt();
-        int height = in.nextInt();
-        board.updateBoard(width, height);
-
-        int myId = in.nextInt();
-        if (in.hasNextLine()) {
-            in.nextLine();
-        }
+        int M = in.nextInt(); System.err.println("Nbr of bikes: " + M);
+        int V = in.nextInt(); System.err.println("Min who must survive: " + V);
+        minBikeWhoSurvive = V;
+        String L0 = in.next(); roads.add(L0);
+        System.err.println("nbr de cellX: " + L0.length());
+        System.err.println("max loop: 50");
+        String L1 = in.next(); roads.add(L1);
+        String L2 = in.next(); roads.add(L2);
+        String L3 = in.next(); roads.add(L3);
+        this.lastRoad = roads.size();
+        System.err.println("last road: " + this.lastRoad);
 
         // create map
-        HashMap<Integer, String> earthMap = new HashMap<Integer, String>();
-        for (int i = 0; i < height; i++) {
-            String line = in.nextLine();
-            earthMap.put(i, line);
+        this.map = new char[L0.length()][roads.size()];
+        for (int y = 0; y < roads.size(); y++) {
+            for (int x = 0; x < L0.length(); x++) {
+                this.map[x][y] = roads.get(y).charAt(x);
+            }
+        }
+        this.lastPosx = L0.length();
+
+        // create motorbikes
+        for (int i = 0; i < M; i++) {
+            Bike bike = new Bike();
+            this.bikes.add(bike);
         }
 
-        // order of deploiement
-        System.out.println(this.deploiement(earthMap,board));
-
-        // create sectors
-        List<Sector> sectorList = utils.makeSectors(0, 0);
-        board.setListSecteurs(sectorList);
-
-        // ********* 2 **** Game loop********************************************************************************************:
+        // game loop
         while (true) {
-            boolean fireTorpedoFollowingOppTorp = false;
-            boolean fireFollowingTorpedoFeedback = false;
-            boolean lunchSonar = false;
-            boolean fireFollowingSonarFeedback = false;
-            boolean moveNextOnSilence = false;
-            boolean oppPresenceOnMySector = false;
-            int x = in.nextInt();
-            int y = in.nextInt();
-            Cell myMoveCell = new Cell(x, y, null, null);
-            int myLife = in.nextInt();
-            int oppLife = in.nextInt();
-            opponentSubmarine.setLife(oppLife);
-            int torpedoCooldown = in.nextInt();
-            int sonarCooldown = in.nextInt();
-            int silenceCooldown = in.nextInt();
-            int mineCooldown = in.nextInt();
-            String sonarResult = in.next();
-            if (in.hasNextLine()) {
-                in.nextLine();
-            }
-            String opponentOrders = in.nextLine();
-
-            mySubmarine.updateSubmarine(myId,x,y,myLife,torpedoCooldown,sonarCooldown,silenceCooldown,mineCooldown, sonarResult, opponentOrders);
-            mySubmarine.setSafeListOfCellAroundMe(utils.createSafeCellListAroundMe(mySubmarine, board));
-            //check.
-            System.err.println(mySubmarine.toString());
-
-            isOpponentSentTorpedo = locateOpponent.readIfOpponentSentTorpedo(mySubmarine.getOpponentOrders());
-            List<Cell> torpedorange = torpedo.createCellListTorpedoRange(mySubmarine.getPositionX(), mySubmarine.getPositionY(), board);
-            mySubmarine.setListTorpedoRange(torpedorange);
-
-            // check count fire list in progres
-            if (mySubmarine.getTorpedoFireList() != null) {
-                long countFireList = mySubmarine.getTorpedoFireList().stream().count();
-                // check
-                System.err.println("fire list in progress: " + countFireList);
-            }
-
-            // ********** 3   **** Locate opponent *************************************************************************:
-            // ----------------------------------- after torpedo -----------------------------------------------------
-            if (mySubmarine.getListOpponentPositionAfterTorpedo() != null) { // update with his next move
-                locateOpponent.updateOpponentPresenceListAfterTorpedoWithNewMovement(mySubmarine, board); // record result list on mySubmarine
-            }
-            if (isOpponentSentTorpedo) {
-                locateOpponent.createRangeCellOfOpponentPositionWhenSendTorpedo(mySubmarine, board);
-            }
-            // --------------------------------------------------------------------------------------------------------
-            // check if opponent make surface
-            int opponentSurfaceSector = locateOpponent.checkIfOpponentMakeSurface(mySubmarine, board);
-            if (opponentSurfaceSector != -1) {
-                // compare with my sector position
-                if (opponentSurfaceSector == mySubmarine.getMySector()) {
-                    oppPresenceOnMySector = true;
+            this.simuMap = this.copyMap(this.map);
+            int S = in.nextInt(); // the motorbikes' speed
+            System.err.println("speed: " + S);
+            for (int i = 0; i < M; i++) {
+                this.bikes.get(i).setId(i);
+                int X = in.nextInt(); bikes.get(i).setX(X);
+                int Y = in.nextInt(); bikes.get(i).setY(Y);
+                int A = in.nextInt();
+                if (A == 1) { this.bikes.get(i).setActive(true);}
+                else { this.bikes.get(i).setActive(false);}
+                this.bikes.get(i).setSpeed(S);
+                // display bike on map
+                if (this.bikes.get(i).isActive()) {
+                    if (this.bikes.get(i).getX() < this.lastPosx) {
+                        this.map[bikes.get(i).getX()][bikes.get(i).getY()] = 'B';
+                    }
                 }
-                // todo if not -> move to this sector
-            }
-
-            // check if opponent make silence move
-            boolean opponentMoveSilently = locateOpponent.checkIfOpponentMakeSilence(mySubmarine, board);
-            if (opponentMoveSilently) {
-                // check
-                System.err.println("opponent move silently ");
-                mySubmarine.setOpponentTorpedoExplosion(null);
-                mySubmarine.setTorpedoFireList(null);
-            }
-            // *********** 4 ****** MySubmarine Check **********************************************************************
-            // sonar feedback
-            //check
-            System.err.println("retour sonar: " + mySubmarine.getSonarResult());
-
-            // check mySector position
-            int mySectorId = utils.findMyPositionSector(mySubmarine, board);
-            mySubmarine.setMySector(mySectorId);
-
-            // check if i can fire torpedo following my position (my torpedo loaded and opponent locate list)
-            if (mySubmarine.getTorpedoCooldown() == 0 && mySubmarine.getListOpponentPositionAfterTorpedo() != null) {
-                fireTorpedoFollowingOppTorp = torpedo.canIFireTorpedo(mySubmarine, board);
-            }
-            // check if my torpedo is loaded
-            if (mySubmarine.getTorpedoCooldown() == 0) {
-                loadedTorpedo = true;
-                // check
-                System.err.println("Torpedo loaded and list range ok");
-            }
-            // check if my sonar is loaded
-            if (mySubmarine.getSonarCooldown() == 0) {
-                loadedSonar = true;
-                //check
-                System.err.println("Sonar loaded");
-            }
-            // check if silence is loaded
-            if (mySubmarine.getSilenceCooldown() == 0) {
-                loadedSilence = true;
-                //check
-                System.err.println("Silence loaded");
-                // lunch sonar in my sector
-                if (mySubmarine.getSonarCooldown() == 0) {
-                    lunchSonar = true;
-                    //check
-                    System.err.println("sonar can sent!");
-                }
-            }
-            // add torpedo order if possible
-            if (fireTorpedoFollowingOppTorp && loadedTorpedo) {
-                fireFollowingTorpedoFeedback = true;
-                loadedTorpedo = false;
-            }
-
-            // if mySubmarine life increase 2 point -> next move to silence if possible
-            int lifeDown = utils.compareLifeLoopBefore(mySubmarine);
-            // check
-//            System.err.println("life down: " + lifeDown);
-            if ((lifeDown == 2) && loadedSilence) {
-                // next move to silence
-                moveNextOnSilence = true;
-            }
-
-
-            // ********** 5   **** Action ***********************************************************************************:
-            // think for next move
-            // first solution (random)
-//            String nextMove = move.moveIA1(mySubmarine, board);
-            // Second solution (to a point)
-            String nextMove = move.moveIA3(mySubmarine, board);
-
-            // check if opponent is in my  sector with sonar feedback
-            //check
-            if (mySubmarine.getSonarResult().equals("Y")) {
-                fireFollowingSonarFeedback = true;
-            }
-
-            // if mySubmarin make SURFACE persist last mySubmarine position on object board
-            if (nextMove == "SURFACE") {
-                listCellAlreadyVisited = new ArrayList<>();
-            }
-            listCellAlreadyVisited.add(myMoveCell);
-            board.setListCellAlreadyVisited(listCellAlreadyVisited);
-
-
-            // if my submarine move -> Charge torpedo first and sonar after and silence after
-            if (nextMove != "SURFACE" && !loadedTorpedo && !moveNextOnSilence) {
-                nextMove = nextMove + chargeTorpedo;
-            }
-            if (nextMove != "SURFACE" && loadedTorpedo && !loadedSonar && !moveNextOnSilence) {
-                nextMove = nextMove + chargeSonar;
-            }
-            if (nextMove != "SURFACE" && loadedTorpedo && loadedSonar && loadedSilence && lunchSonar && !moveNextOnSilence) {
-                //check
-                System.err.println("passage sonar order");
-                // lunch sonar
-                nextMove = sentSonar + String.valueOf(mySubmarine.getMySector()) + "|" + nextMove;
-                loadedSonar = false;
-            }
-            if (nextMove != "SURFACE" && loadedTorpedo && loadedSonar && !moveNextOnSilence) {
-                nextMove = nextMove + chargeSilence;
-            }
-            if (nextMove != "SURFACE" && moveNextOnSilence && loadedSilence) {
-                //check
-                System.err.println("next move on silence!");
-                moveNextOnSilence = false;
-                loadedSilence = false;
-                nextMove = silence + mySubmarine.getMyNextMove().getCardinalPoint() + 1;
-            }
-            // check
-            System.err.println("Fire Following Torpedo Feedback: " + fireFollowingTorpedoFeedback);
-            System.err.println("Fire Following Sonar Feedback: " + fireFollowingSonarFeedback);
-            System.err.println("Opponent presence on my sector: " + oppPresenceOnMySector);
-            System.err.println("--Torpedo loaded: " + loadedTorpedo + " --");
-
-            // ----------- FIRE ---------- FIRE -------------- FIRE -----------
-            // add fire on move order following opponent fire
-            if (fireFollowingTorpedoFeedback && !fireFollowingSonarFeedback && !moveNextOnSilence) {
-                System.err.println("passage fire following opp torpedo");
-                // get random cell on fireList
-                Cell randomfireTorpedo = utils.randomCellOnList(mySubmarine.getTorpedoFireList());
-                String addfireTorpedoString = "TORPEDO " + randomfireTorpedo.getX() + " " + randomfireTorpedo.getY();
-                String nextMoveFire = addfireTorpedoString + "|" + nextMove;
-                // order of move and fire
-                loadedTorpedo = false;
-                System.err.println("------- FIRE  -----------");
-                System.out.println(nextMoveFire);
-            }
-            // add fire on move order following sonar or opponent presence on my sector
-            else if (fireFollowingSonarFeedback && !fireFollowingTorpedoFeedback && !moveNextOnSilence ||
-                    oppPresenceOnMySector && loadedTorpedo) {
-                System.err.println("passage fire following opp on my sector (sonar or opp SURFACE)");
-                // get random cell on mySector
-                Cell randomfireTorpedo = torpedo.createPossibilitiCellOnSector(mySubmarine, board);
-                String addfireTorpedoString = "TORPEDO " + randomfireTorpedo.getX() + " " + randomfireTorpedo.getY();
-                String nextMoveFire = addfireTorpedoString + "|" + nextMove;
-
-                // update lifeLoopBefore
-                mySubmarine.setLifeLoopBefore(mySubmarine.getLife());
-                // order of move and fire
-                loadedTorpedo = false;
-                System.err.println("------- FIRE  -----------");
-                System.out.println(nextMoveFire);
 
             }
-            // -----------JUST MOVE  ---------- JUST MOVE -------------- JUST MOVE -----------
-            else {
-                // update lifeLoopBefore
-                mySubmarine.setLifeLoopBefore(mySubmarine.getLife());
-                // order for move
-                System.out.println(nextMove);
-            }
 
-            // print submarines info
-//            System.err.println("My submarine: " + mySubmarine.toString());
-//            System.err.println("Opponent submarine: " + opponentSubmarine.toString());
+            // resolving puzzle
+            displayMap(map);
+            // create all orders combination -> 5 words and 5 turns
+            if (loop == 0) {
+                this.createCombinationForSimuOrders();
+                this.simuUnit = new SimuUnit(this.simuOrders); // creation d'une simuUnit
+            }
+            // TODO simulation down is NOK -> quand y a du speed il ne doit pas choisir de descendre quand il y a un trou a x+1
+            // simulation:
+            // je simule un ordre tous les ordres pour trouver la meilleure
+            this.simulateAllOrders();
+            // order out:
+            System.out.println(this.bestOrder);
+            loop++;
         }
     }
 
-    public String deploiement(HashMap earthMap, Board board) {
-        deploy = new Deploy();
-
-        deploy.displayEarthAnalysis(earthMap);
-        deploy.recordEarthCellOnBoard(earthMap, board);
-
-        return deploy.deploy1(earthMap);
-    }
-}
-
-class Sector {
-
-    private int id;
-    private List<Cell> listCell;
-    private Cell minCell;
-    private Cell maxCell;
-
-    // constructeur
-    public Sector() {
-    }
-
-    public Sector(int id, List<Cell> listCell, Cell minCell, Cell maxCell) {
-        this.id = id;
-        this.listCell = listCell;
-        this.minCell = minCell;
-        this.maxCell = maxCell;
-    }
-
-    // getters ad setters
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public List<Cell> getListCell() {
-        return listCell;
-    }
-    public void setListCell(List<Cell> listCell) {
-        this.listCell = listCell;
-    }
-    public Cell getMinCell() {
-        return minCell;
-    }
-    public void setMinCell(Cell minCell) {
-        this.minCell = minCell;
-    }
-    public Cell getMaxCell() {
-        return maxCell;
-    }
-    public void setMaxCell(Cell maxCell) {
-        this.maxCell = maxCell;
-    }
-
-    // to string
-    @Override
-    public String toString() {
-        return "Sector{" +
-                "id=" + id +
-                ", listCell=" + listCell +
-                ", minCell=" + minCell +
-                ", maxCell=" + maxCell +
-                '}';
-    }
-}
-
-class Submarine {
-    private int id;
-    private int positionX;
-    private int positionY;
-    private int mySector;
-    private int life;
-    private int lifeLoopBefore;
-    private int torpedoCooldown;
-    private int sonarCooldown;
-    private int silenceCooldown;
-    private int mineCooldown;
-    private String sonarResult;
-    private String opponentOrders;
-    private List<Cell> safeListOfCellAroundMe;
-    private List<Cell> listTorpedoRange;
-    private List<Cell> listOpponentPositionAfterTorpedo;
-    private Cell opponentTorpedoExplosion;
-    private List<Cell> torpedoFireList;
-    private Cell myNextMove;
-    private int destinationSector;
-
-
-    // constructor
-    public Submarine() {
-    }
-
-    public Submarine(int id, int positionX, int positionY, int mySector, int life, int lifeLoopBefore, int torpedoCooldown, int sonarCooldown, int silenceCooldown, int mineCooldown, String sonarResult, String opponentOrders, List<Cell> safeListOfCellAroundMe, List<Cell> listTorpedoRange, List<Cell> listOpponentPositionAfterTorpedo, Cell opponentTorpedoExplosion, List<Cell> torpedoFireList, Cell myNextMove, int destinationSector) {
-        this.id = id;
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.mySector = mySector;
-        this.life = life;
-        this.lifeLoopBefore = lifeLoopBefore;
-        this.torpedoCooldown = torpedoCooldown;
-        this.sonarCooldown = sonarCooldown;
-        this.silenceCooldown = silenceCooldown;
-        this.mineCooldown = mineCooldown;
-        this.sonarResult = sonarResult;
-        this.opponentOrders = opponentOrders;
-        this.safeListOfCellAroundMe = safeListOfCellAroundMe;
-        this.listTorpedoRange = listTorpedoRange;
-        this.listOpponentPositionAfterTorpedo = listOpponentPositionAfterTorpedo;
-        this.opponentTorpedoExplosion = opponentTorpedoExplosion;
-        this.torpedoFireList = torpedoFireList;
-        this.myNextMove = myNextMove;
-        this.destinationSector = destinationSector;
-    }
-
-    // getters setters
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public int getPositionX() {
-        return positionX;
-    }
-    public void setPositionX(int positionX) {
-        this.positionX = positionX;
-    }
-    public int getPositionY() {
-        return positionY;
-    }
-    public void setPositionY(int positionY) {
-        this.positionY = positionY;
-    }
-    public int getMySector() {
-        return mySector;
-    }
-    public void setMySector(int mySector) {
-        this.mySector = mySector;
-    }
-    public int getLife() {
-        return life;
-    }
-    public void setLife(int life) {
-        this.life = life;
-    }
-    public int getLifeLoopBefore() {
-        return lifeLoopBefore;
-    }
-    public void setLifeLoopBefore(int lifeLoopBefore) {
-        this.lifeLoopBefore = lifeLoopBefore;
-    }
-    public int getTorpedoCooldown() {
-        return torpedoCooldown;
-    }
-    public void setTorpedoCooldown(int torpedoCooldown) {
-        this.torpedoCooldown = torpedoCooldown;
-    }
-    public int getSonarCooldown() {
-        return sonarCooldown;
-    }
-    public void setSonarCooldown(int sonarCooldown) {
-        this.sonarCooldown = sonarCooldown;
-    }
-    public int getSilenceCooldown() {
-        return silenceCooldown;
-    }
-    public void setSilenceCooldown(int silenceCooldown) {
-        this.silenceCooldown = silenceCooldown;
-    }
-    public int getMineCooldown() {
-        return mineCooldown;
-    }
-    public void setMineCooldown(int mineCooldown) {
-        this.mineCooldown = mineCooldown;
-    }
-    public String getSonarResult() {
-        return sonarResult;
-    }
-    public void setSonarResult(String sonarResult) {
-        this.sonarResult = sonarResult;
-    }
-    public String getOpponentOrders() {
-        return opponentOrders;
-    }
-    public void setOpponentOrders(String opponentOrders) {
-        this.opponentOrders = opponentOrders;
-    }
-    public List<Cell> getSafeListOfCellAroundMe() {
-        return safeListOfCellAroundMe;
-    }
-    public void setSafeListOfCellAroundMe(List<Cell> safeListOfCellAroundMe) {
-        this.safeListOfCellAroundMe = safeListOfCellAroundMe;
-    }
-    public List<Cell> getListTorpedoRange() {
-        return listTorpedoRange;
-    }
-    public void setListTorpedoRange(List<Cell> listTorpedoRange) {
-        this.listTorpedoRange = listTorpedoRange;
-    }
-    public List<Cell> getListOpponentPositionAfterTorpedo() {
-        return listOpponentPositionAfterTorpedo;
-    }
-    public void setListOpponentPositionAfterTorpedo(List<Cell> listOpponentPositionAfterTorpedo) {
-        this.listOpponentPositionAfterTorpedo = listOpponentPositionAfterTorpedo;
-    }
-    public Cell getOpponentTorpedoExplosion() {
-        return opponentTorpedoExplosion;
-    }
-    public void setOpponentTorpedoExplosion(Cell opponentTorpedoExplosion) {
-        this.opponentTorpedoExplosion = opponentTorpedoExplosion;
-    }
-    public List<Cell> getTorpedoFireList() {
-        return torpedoFireList;
-    }
-    public void setTorpedoFireList(List<Cell> torpedoFireList) {
-        this.torpedoFireList = torpedoFireList;
-    }
-    public Cell getMyNextMove() {
-        return myNextMove;
-    }
-    public void setMyNextMove(Cell myNextMove) {
-        this.myNextMove = myNextMove;
-    }
-    public int getDestinationSector() {
-        return destinationSector;
-    }
-    public void setDestinationSector(int destinationSector) {
-        this.destinationSector = destinationSector;
-    }
-
-    // to string
-    @Override
-    public String toString() {
-        return "Submarine{" +
-                "id=" + id +
-                ", positionX=" + positionX +
-                ", positionY=" + positionY +
-                ", mySector=" + mySector +
-                ", life=" + life +
-                ", lifeLoopBefore=" + lifeLoopBefore +
-                ", torpedoCooldown=" + torpedoCooldown +
-                ", sonarCooldown=" + sonarCooldown +
-                ", silenceCooldown=" + silenceCooldown +
-                ", mineCooldown=" + mineCooldown +
-                ", sonarResult='" + sonarResult + '\'' +
-                ", opponentOrders='" + opponentOrders + '\'' +
-                ", safeListOfCellAroundMe=" + safeListOfCellAroundMe +
-                ", listTorpedoRange=" + listTorpedoRange +
-                ", listOpponentPositionAfterTorpedo=" + listOpponentPositionAfterTorpedo +
-                ", opponentTorpedoExplosion=" + opponentTorpedoExplosion +
-                ", torpedoFireList=" + torpedoFireList +
-                ", myNextMove=" + myNextMove +
-                ", destinationSector=" + destinationSector +
-                '}';
-    }
-
-    public void updateSubmarine(int id, int positionX, int positionY, int life, int torpedoCooldown,
-                                int sonarCooldown, int silenceCooldown, int mineCooldown,
-                                String sonarResult, String opponentOrders ) {
-        this.setId(id);
-        this.setPositionX(positionX);
-        this.setPositionY(positionY);
-        this.setLife(life);
-        this.setTorpedoCooldown(torpedoCooldown);
-        this.setSonarCooldown(sonarCooldown);
-        this.setSilenceCooldown(silenceCooldown);
-        this.setMineCooldown(mineCooldown);
-        this.setSonarResult(sonarResult);
-        this.setOpponentOrders(opponentOrders);
-    }
-}
-
-class Torpedo {
-    Utils utils = new Utils();
-
-    /**
-     * Create cell list of my torpedo range or opponent case range (when he has send torpedo)
-     * removing s and y (my position or explosion position)
-     * @param x myPositionX or explosedOponentTorpedoX
-     * @param y myPositionY or explosedOponentTorpedoY
-     * @param board
-     * @return
-     */
-    public List<Cell> createCellListTorpedoRange(int x, int y, Board board) {
-        List<Cell> listCellTorpedoRange = new ArrayList<>();
-        int rangeMinX = -4;
-        int rangeMaxX = 4;
-        int centerCellY = y;
-        int countChangeSide = 0;
-        //down and up triangle
-        for (int j = 1; j <= 11; j++) {
-            // add line
-            for (int i = rangeMinX; i <= rangeMaxX ; i++) {
-                // create centerCell
-                Cell leftEndCell = new Cell(x + i, centerCellY, null,null);
-                listCellTorpedoRange.add(leftEndCell);
-                countChangeSide++;
+    public void displayMap(char[][] map) {
+        for (int y = 0; y < map[0].length; y++) {
+            String line = "";
+            for (int x = 0; x < map.length; x++) {
+                line += map[x][y];
             }
-            // add down triangle
-            if (countChangeSide <= 25) {
-                // check
-//                System.err.println("passage down" );
-                rangeMaxX--;
-                rangeMinX++;
-                centerCellY++;
-                if (countChangeSide == 25) {
-                    countChangeSide++;
+            System.err.println(line);
+            line = "";
+        }
+    }
+
+    public char[][] copyMap(char[][] map) {
+        char[][] copyArray = new char[map.length][map[0].length];
+
+        for (int y = 0; y < copyArray[0].length; y++) {
+            for (int x = 0; x < copyArray.length; x++) {
+                copyArray[x][y] = map[x][y];
+            }
+        }
+        return copyArray;
+    }
+
+    public void createCombinationForSimuOrders() {
+        String combination = "";
+        String nbrDigitNok;
+        String nbrWithGoodNbrOfDigit;
+        List<String> listCombinationTotalNbrStr = new ArrayList<>(); // all combination number
+        int combTotal = (int) Math.pow(5, 5);
+
+        combTotal -= 1;
+        //convert on base 5
+        do {
+            combination = intToBase(combTotal, 5);
+            listCombinationTotalNbrStr.add(combination);
+            combTotal--;
+
+        } while (combTotal > 0);
+        listCombinationTotalNbrStr.add("0"); // add last combination 0
+
+        // add 0 on combination with nbr of digit < 5
+        for (int i = 0; i < listCombinationTotalNbrStr.size(); i++) {
+            nbrDigitNok = listCombinationTotalNbrStr.get(i);
+            nbrWithGoodNbrOfDigit = completeStringFollowingNbrDigit(nbrDigitNok);
+            listCombinationTotalNbrStr.set(i, nbrWithGoodNbrOfDigit);
+        }
+
+        // convert combination number on orders words
+        for (int i = 0; i < listCombinationTotalNbrStr.size(); i++) {
+            List<String> orderList = new ArrayList<>();
+            for (int j = 0; j < listCombinationTotalNbrStr.get(i).length(); j++) {
+                char c = listCombinationTotalNbrStr.get(i).charAt(j);
+                if (c == '0') { orderList.add("SPEED"); }
+                if (c == '1') { orderList.add("SLOW"); }
+                if (c == '2') { orderList.add("JUMP"); }
+                if (c == '3') { orderList.add("UP"); }
+                if (c == '4') { orderList.add("DOWN"); }
+            }
+            this.simuOrders.add(orderList);
+        }
+        // test:
+        System.err.println("simuOrders created: " + this.simuOrders.stream().count());
+    }
+
+    public String intToBase(int pEntier, int pBase) {
+
+        int nbr = pEntier;
+        int rest;
+        String resultTemp = "";
+        String resultFinal = "";
+
+        do {
+            rest = nbr % pBase;
+            resultTemp = resultTemp + rest;
+            nbr = nbr / pBase;
+        } while (nbr > 0);
+
+        //j'inverse le string resultFinal
+        int decompte = resultTemp.length() - 1;
+        for (int i = decompte; i >= 0; i--) {
+            char digit = resultTemp.charAt(i);
+            resultFinal = resultFinal + digit;
+        }
+
+        return resultFinal;
+    }
+
+    protected String completeStringFollowingNbrDigit(String pIn) {
+
+        int nbrDigit = 5;
+
+        //variables
+        String nbrStr = pIn;
+        String nbrMaxStr = "1";
+        String nbrFinalStr = "";
+
+        // je trouve le chiffre minimum avec le nombre de digit
+        for (int i = 0; i < (nbrDigit - 1); i++) {
+            nbrMaxStr = nbrMaxStr + "0";
+        }
+        Integer nbrMax = Integer.parseInt(nbrMaxStr);
+
+        // je complete les String avec pas assez de digit
+
+        // je compte le nombre de digit
+        int countNbrDigit = 0;
+
+        for (int i = 0; i < nbrStr.length(); i++) {
+            countNbrDigit++;
+        }
+        // il faut donc rajouter combien de zero
+        int nbrzero = nbrDigit - countNbrDigit;
+
+        // je crée les zero manquant
+        for (int i = 0; i < nbrzero; i++) {
+            nbrFinalStr = nbrFinalStr + "0";
+        }
+
+        // je rajoute mon pIn
+        nbrFinalStr = nbrFinalStr + nbrStr;
+
+        return nbrFinalStr;
+    }
+
+    public void simulateAllOrders()  {
+        int countSimuOrder = 0;
+        // set position on simuMap
+        for (int k = 0; k < this.bikes.size(); k++) {
+            if (this.bikes.get(k).getX() < this.lastPosx) {
+                this.simuMap[this.bikes.get(k).getX()][this.bikes.get(k).getY()] = 'B';
+            }
+        }
+        for (int i = 0; i < this.simuOrders.size(); i++) { // simulation avec la liste de tous les ordres
+            //for (int i = 2031; i < 2032; i++) { // simulation avec la liste de tous les ordres
+
+                // init
+            this.simuMap = this.copyMap(map);
+            this.simuBikes = new ArrayList<>();
+            for (Bike bike : this.bikes) {
+                Bike newBike = new Bike();
+                newBike.setId(bike.getId());
+                newBike.setX(bike.getX());
+                newBike.setY(bike.getY());
+                newBike.setActive(true);
+                newBike.setInvalidOrder(false);
+                newBike.setSpeed(bike.getSpeed());
+                this.simuBikes.add(newBike);
+            }
+            //System.err.println("simu bike0 x: " + this.simuBikes.get(0).getX());
+            //System.err.println("simu bike0 info: " + this.simuBikes.get(0).toString());
+
+            countSimuOrder++;
+            int score = 0;
+
+            // check display on map
+            //System.err.println("map before turn");
+            //this.displayMap(this.simuMap);
+
+            //System.err.println("simu orders: " + this.simuOrders.get(i).toString());
+
+            for (int j = 0; j < 5; j++) { // simulation avec 5 ordres
+                String order = this.simuOrders.get(i).get(j);
+                //System.err.println("simu order" + j + " :" + order);
+
+
+                if (order.equals("SPEED") || order.equals("SLOW")) {
+                    this.simuSpeed(order);
                 }
+
+                if (order.equals("JUMP")) {
+                    this.simuJump();
+                }
+
+
+                if (order.equals("DOWN")) {
+                    this.simuDown();
+                }
+
+                if (order.equals("UP")) {
+                    for (Bike bike: this.simuBikes) {
+                        bike.setInvalidOrder(true);
+                    }
+                }
+
+
+                // calculate score
+                for (Bike bike : this.simuBikes) {
+                    if (bike.isInvalidOrder()) {
+                        score = -10;
+                    }
+                    if (bike.isActive() && bike.getSpeed() > 0) {
+                        score = score + bike.getX();
+                    }
+
+                    if (!bike.isActive()) {
+                        score = score - 50;
+                    }
+                    // TODO check for one comb
+                    if (i == 0) {
+                        System.err.println("simu order" + j + " bike" + bike.getId() + " is active -> " + bike.isActive());
+                        System.err.println(bike.toString());
+                    }
+                }
+                // check display on map
+                //System.err.println("map after turn");
+                //this.displayMap(this.simuMap);
+
+            }
+            this.simuUnit.setScore(i, score);
+            //System.err.println("check score for" + i + " :" + this.simuUnit.getScores().get(i));
+
+
+        }
+        // check
+        System.err.println("count simu order: " + countSimuOrder);
+
+        // find best score
+        int indexOfBestScore = this.findBestScore();
+        System.err.println("best order: " + this.simuOrders.get(indexOfBestScore).toString() + " -> N°:" + indexOfBestScore);
+        System.err.println("best score: " + this.simuUnit.getScores().get(indexOfBestScore));
+        // System.err.println("score for 0: " + this.simuUnit.getScores().get(0));
+
+
+
+        this.bestOrder = simuOrders.get(indexOfBestScore).get(0);
+
+    }
+
+    public int findBestScore() {
+        int score = -10000;
+        int index = 0;
+        for (int i = 0; i < this.simuUnit.getScores().size() - 1; i++) {
+            if (this.simuUnit.getScores().get(i) > score) {
+                score = this.simuUnit.getScores().get(i);
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    public void simuSpeed(String order) {
+        for (int i = 0; i < this.simuBikes.size(); i++) {
+            if (this.simuBikes.get(i).isActive()) {
+                int speed = this.simuBikes.get(i).getSpeed();
+                if (order.equals("SPEED")) {
+                    speed++;
+                    this.simuBikes.get(i).setSpeed(speed);
+                }
+                if (order.equals("SLOW")) {
+                    if (this.simuBikes.get(i).getSpeed() > 0) {
+                        speed--;
+                        this.simuBikes.get(i).setSpeed(speed);
+                    }
+                }
+                Cell position = new Cell(this.simuBikes.get(i).getX(), this.simuBikes.get(i).getY());
+
+                // set next position on bike
+                if (speed == 0) {
+                    this.simuBikes.get(i).setX(position.getX());
+                    this.simuBikes.get(i).setY(position.getY());
+                } else {
+                    this.simuBikes.get(i).setX(this.simuBikes.get(i).getX() + speed );
+                    this.simuBikes.get(i).setY(this.simuBikes.get(i).getY());
+                }
+                // check invalid order -> speed
+                if (this.simuBikes.get(i).getSpeed() > 10) { this.simuBikes.get(i).setInvalidOrder(true); }
+                if (this.simuBikes.get(i).getSpeed() <= 0) { this.simuBikes.get(i).setInvalidOrder(true); }
+
+                // check if there is a hole
+                if (this.simuBikes.get(i).getX() < map.length) {
+                    this.simuBikes.get(i).setActive(this.simulationCheckIfBikeIsActive(position,
+                            new Cell(this.simuBikes.get(i).getX(), this.simuBikes.get(i).getY())));
+
+                    // test off
+                    // set invalid order
+                    this.simulationCheckInvalidPos(this.lastRoad, order); // TODO possibility of bug -> see invalid order speed
+                    // set next position on simuMap
+                    String speedStr = String.valueOf(this.simuBikes.get(i).getSpeed());
+                    simuMap[this.simuBikes.get(i).getX()][this.simuBikes.get(i).getY()] = speedStr.charAt(0);
+                }
+
+            }
+        }
+    }
+
+    public void simuJump() {
+        for (int i = 0; i < this.simuBikes.size(); i++) {
+            if (this.simuBikes.get(i).isActive()) {
+                int speed = this.simuBikes.get(i).getSpeed();
+                this.simuBikes.get(i).setX(this.simuBikes.get(i).getX() + speed);
+                this.simuBikes.get(i).setY(this.simuBikes.get(i).getY());
+                if (this.simuBikes.get(i).getX() < map.length) {
+                    // check if there is hole on reception
+                    if (this.map[this.simuBikes.get(i).getX()][this.simuBikes.get(i).getY()] == '0') {
+                        this.simuBikes.get(i).setActive(false);
+                    }
+                    // set next position on simuMap
+                    String speedStr = String.valueOf(this.simuBikes.get(i).getSpeed());
+                    simuMap[this.simuBikes.get(i).getX()][this.simuBikes.get(i).getY()] = speedStr.charAt(0);
+                }
+
+            }
+        }
+    }
+
+    public void simuDown() {
+        for (int i = 0; i < this.simuBikes.size(); i++) {
+            if (this.simuBikes.get(i).isActive() && (this.simuBikes.get(i).getY() + 1 < this.lastRoad - 1) ) { //active and not on last road
+                int speed = this.simuBikes.get(i).getSpeed();
+                // check if there is hole on simuMap during this move
+                // y check
+                if (speed > 0) {
+                    for (int j = 1; j <= speed; j++) {
+                        if (this.simuBikes.get(i).getX() + j < this.lastPosx) {
+                            // on x
+                            if (this.simuMap[this.simuBikes.get(i).getX() + j][this.simuBikes.get(i).getY()] == 'O') {
+                                this.simuBikes.get(i).setActive(false);
+                            }
+                            // on y
+                            if (this.simuBikes.get(i).getY() + 1 < this.lastRoad) {
+                                if (this.simuMap[this.simuBikes.get(i).getX() + j][this.simuBikes.get(i).getY() + 1] == '0') {
+                                    this.simuBikes.get(i).setActive(false);
+                                }
+                            }
+                        } else {
+                            this.simuBikes.get(i).setInvalidOrder(true);
+                        }
+
+                    }
+                }
+                // set new simu pos
+                this.simuBikes.get(i).setY(this.simuBikes.get(i).getY() + 1);
+                this.simuBikes.get(i).setX(this.simuBikes.get(i).getX() + speed);
             } else {
-                if (countChangeSide == 26) {
-                    rangeMinX = -4;
-                    rangeMaxX = 4;
-                    centerCellY = y;
-                    countChangeSide++;
-                }
-                // add up triangle
-                if (countChangeSide >= 26) {
-                    // check
-                    rangeMaxX--;
-                    rangeMinX++;
-                    centerCellY--;
-                }
+                this.simuBikes.get(i).setInvalidOrder(true);
             }
-        }
-        // check all
-//        System.err.println("my torpedo range list all " + listCellTorpedoRange.toString());
-
-        // remove end of map
-        List<Cell> listWithoutEndOfMap = utils.removeEndOfMap(listCellTorpedoRange, board);
-        // remove earth on last list
-        List<Cell> listWithoutEndOfMapAndEarth = utils.removeEarthCell(listWithoutEndOfMap, board);
-        // remove center position
-        List<Cell> listWithoutEndOfMapAndEarthAndCenterCell = listWithoutEndOfMapAndEarth;
-        for (int i = 0; i < listWithoutEndOfMapAndEarth.size(); i++) {
-            if (listWithoutEndOfMapAndEarth.get(i).getX() == x && listWithoutEndOfMapAndEarth.get(i).getY() == y) {
-                listWithoutEndOfMapAndEarthAndCenterCell.remove(i);
-            }
-
-        }
-        // check
-//        System.err.println("my torpedo range list " + listWithoutEndOfMapAndEarthAndXY.toString());
-//        long nbrCasePosible = listWithoutEndOfMapAndEarthAndXY.stream().count();
-//        System.err.println("my taget case possible(torp): " + nbrCasePosible);
-        return listWithoutEndOfMapAndEarthAndCenterCell;
-    }
-
-    public List<Cell> mixRangePossibilityAfterTorpedoWithMyRangeTorpedo (List<Cell> inputRangeListAfterTorpedo, Submarine mySubmarine) {
-        List<Cell> possibilityOfTorpedoFire = new ArrayList<>();
-        List<Cell> myRangeTorpedoList = mySubmarine.getListTorpedoRange();
-
-        for (int i = 0; i < inputRangeListAfterTorpedo.size() ; i++) {
-            for (int j = 0; j < myRangeTorpedoList.size(); j++) {
-                if (inputRangeListAfterTorpedo.get(i).getX() == myRangeTorpedoList.get(j).getX()) {
-                    if (inputRangeListAfterTorpedo.get(i).getY() == myRangeTorpedoList.get(j).getY()) {
-                        possibilityOfTorpedoFire.add(myRangeTorpedoList.get(j));
-                    }
-                }
-            }
-        }
-        // check
-//        System.err.println("Possibility of fire on: " + possibilityOfTorpedoFire.toString());
-        return possibilityOfTorpedoFire;
-    }
-
-    public boolean canIFireTorpedo(Submarine mySubmarine, Board board) {
-        List<Cell> potentialfireList = mixRangePossibilityAfterTorpedoWithMyRangeTorpedo(mySubmarine.getListOpponentPositionAfterTorpedo(), mySubmarine);
-        // remove cell around me
-        utils.createSafeCellListAroundMe(mySubmarine, board);
-        // remove safeList of potentialFireList
-        List<Cell> fireList = utils.removeCellsOnList(potentialfireList, mySubmarine.getSafeListOfCellAroundMe());
-        mySubmarine.setTorpedoFireList(fireList);
-        // check
-        Long countFirecell = fireList.stream().count();
-        System.err.println("Possibility of fire on: " + countFirecell);
-//                System.err.println("Possibility of fire on: " + fireList.toString());
-        if (!fireList.isEmpty()) {
-            return true;
-        } else {
-            return false;
         }
     }
 
-    public Cell createPossibilitiCellOnSector(Submarine mySubmarine, Board board) {
-        List<Cell> resultList = new ArrayList<>();
+    public boolean simulationCheckIfBikeIsActive(Cell beginPos, Cell endPos) {
+        int diffOnCellX = endPos.getX() - beginPos.getX();
 
-        // get random cell on sector without safe list around me and only my torpedo range
-        List<Cell> mySectorCellList = utils.findSectorCellWithPosition(mySubmarine, board);
-        // list of safe cell (around me)
-        utils.createSafeCellListAroundMe(mySubmarine, board);
-        List<Cell> mySafeCellList = mySubmarine.getSafeListOfCellAroundMe();
-        // remove safe cell to mysecto cells
-        List<Cell> mySectorWithoutsafeList = utils.removeCellsOnList(mySectorCellList, mySafeCellList);
-        // get my range torpedo list
-        // keep only forFireList - myrangeTorpedo -> to verify
-        List<Cell> fireList = mixRangePossibilityAfterTorpedoWithMyRangeTorpedo(mySectorWithoutsafeList,mySubmarine);
-        // check
-//                System.err.println("potential fire following sonar: " + fireList.toString());
-        System.err.println("potential fire on my sector: " + fireList.stream().count());
-        // get random cell on fireList
-        Cell randomfireTorpedo = utils.randomCellOnList(fireList);
+        for (int i = 0; i <= diffOnCellX; i++) {
+            if (this.map[beginPos.getX() + i][beginPos.getY()] == '0') {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    public void simulationCheckInvalidPos(int lastRoad, String order) {
+        boolean bikeOnFirstLine = false;
+        for (int i = 0; i < this.simuBikes.size(); i++) {
+            if (this.simuBikes.get(i).getY() == 0 && order.equals("UP")) { bikeOnFirstLine = true; }
+        }
+        if (bikeOnFirstLine) {
+            for (Bike bike : this.simuBikes) {
+                bike.setInvalidOrder(true);
+            }
+        }
 
-        return randomfireTorpedo;
+        boolean bikeOnLastLine = false;
+        for (int i = 0; i < this.simuBikes.size(); i++) {
+            if (this.simuBikes.get(i).getY() == lastRoad && order.equals("DOWN")) { bikeOnLastLine = true; }
+        }
+        if (bikeOnLastLine) {
+            for (Bike bike : this.simuBikes) {
+                bike.setInvalidOrder(true);
+            }
+        }
     }
 }
 
 
-class Utils {
+class SimuUnit {
 
-    /**
-     * For count distance with 2 cells with cardinal move
-     * @param c
-     * @param other
-     * @return int
-     */
-    public int distanceFromCell(Cell c, Cell other){
-        return abs(c.getX() - other.getX()) + abs(c.getY() - other.getY());
+    private List<List<String>> orders;
+    private HashMap<Integer, Integer> scores;
+
+    public SimuUnit(List<List<String>> orders) {
+        this.orders = orders;
+        this.scores = new HashMap<>();
     }
 
-    public Cell randomCellOnList (List<Cell> inputList) {
-        Random rand = new Random();
+    public List<List<String>> getOrders() { return orders; }
+    public HashMap<Integer, Integer> getScores() { return scores; }
 
-        // limit for random 4 -> direction (North, South, West, Est).
-        int max = inputList.size() - 1;
-        int min = 0;
-        int randomCellInt = rand.nextInt(max - min + 1) + min;
-        Cell randomCell = inputList.get(randomCellInt);
-        return randomCell;
+    // methods
+    public void setScore(int indexOnList, int score) {
+        this.scores.put(indexOnList, score);
     }
 
-    public List<Sector> makeSectors(int xMin, int yMin) {
-        int xMinIncrement = xMin;
-        int yMinIncrement = yMin;
-        int sectorCount = 1;
-
-        List<Sector> sectorList = new ArrayList<>();
-        for (int j = 1; j <= 3 ; j++) {
-            for (int i = 1; i <= 3; i++) {
-                Sector sector = fillSector(xMinIncrement, yMinIncrement);
-                sector.setId(sectorCount);
-                sectorList.add(sector);
-                // boucle for x
-                xMinIncrement = xMinIncrement + 5;
-                sectorCount++;
-            }
-            xMinIncrement = xMin;
-            // bouche for y
-            yMinIncrement= yMinIncrement + 5;
-        }
-
-        // check
-//        System.err.println("print sector 4 " + sectorList.get(3).toString());
-        return sectorList;
-    }
-
-    public List<Cell> createSafeCellListAroundMe(Submarine mySubmarine, Board board) {
-        List<Cell> listSafeCell = new ArrayList<>();
-        int x = mySubmarine.getPositionX();
-        int y = mySubmarine.getPositionY();
-        // record My position
-        Cell myPositionCell = new Cell(x,y,null, null);
-
-        listSafeCell.add(myPositionCell);
-        // record cardinal position cell
-        Cell northCell = new Cell(x, y -1, null, null);
-        listSafeCell.add(northCell);
-        Cell southCell = new Cell(x, y +1, null, null);
-        listSafeCell.add(southCell);
-        Cell westCell = new Cell(x - 1, y, null, null);
-        listSafeCell.add(westCell);
-        Cell estCell = new Cell(x + 1, y, null, null);
-        listSafeCell.add(estCell);
-
-        // record diagonal position
-        Cell northEstCell = new Cell(x + 1, y - 1, null, null);
-        listSafeCell.add(northEstCell);
-        Cell northWestCell = new Cell(x - 1, y - 1, null, null);
-        listSafeCell.add(northWestCell);
-        Cell southEstCell = new Cell(x + 1, y + 1, null, null);
-        listSafeCell.add(southEstCell);
-        Cell southWestCell = new Cell(x - 1, y + 1, null, null);
-        listSafeCell.add(southWestCell);
-
-        // remove cell out map
-        return removeEndOfMap(listSafeCell, board);
-
-    }
-
-    public List<Cell> removeEndOfMap(List<Cell> list, Board board) {
-        ArrayList<Cell> listWithoutMapLimit = new ArrayList<Cell>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getX() >= 0 && list.get(i).getX() < board.getNbrCellX() &&
-                    list.get(i).getY() >= 0 && list.get(i).getY() < board.getNbrCellY()) {
-                listWithoutMapLimit.add(list.get(i));
-            }
-        }
-        // check
-//        System.err.println("list of possible move without map limit: " + listWithoutMapLimit.toString());
-        return listWithoutMapLimit;
-    }
-
-    public List<Cell> removeEarthCell(List<Cell> inputList, Board board) {
-        ArrayList<Cell> listWithoutEarthCell = new ArrayList<Cell>();
-        ArrayList<Cell> listEarthCell = (ArrayList<Cell>) board.getListCellEarth();
-        for (int i = 0; i < inputList.size(); i++) {
-            boolean cellOk = true;
-            for (int j = 0; j < listEarthCell.size(); j++) {
-                if (listEarthCell.get(j).getX() == inputList.get(i).getX() &&
-                        listEarthCell.get(j).getY() == inputList.get(i).getY()) {
-                    cellOk = false;
-                }
-            }
-            if (cellOk) { listWithoutEarthCell.add(inputList.get(i)); }
-        }
-        // check
-//        System.err.println("list of possible move without map limit and earth: " + listWithoutEarthCell.toString());
-        return listWithoutEarthCell;
-    }
-
-    public List<Cell> removeAlreadyVisitedCell(List<Cell> inputList, Board board) {
-        ArrayList<Cell> listWithoutVisitedCell = new ArrayList<Cell>();
-        ArrayList<Cell> listVisitedCell = (ArrayList<Cell>) board.getListCellAlreadyVisited();
-
-        if (listVisitedCell != null) {
-            for (int i = 0; i < inputList.size(); i++) {
-                boolean cellOk = true;
-                for (int j = 0; j < listVisitedCell.size(); j++) {
-                    if (listVisitedCell.get(j).getX() == inputList.get(i).getX() &&
-                            listVisitedCell.get(j).getY() == inputList.get(i).getY()) {
-                        cellOk = false;
-                    }
-                }
-                if (cellOk) {
-                    listWithoutVisitedCell.add(inputList.get(i));
-                }
-            }
-        } else {
-            // add input cell
-            for (int i = 0; i < inputList.size(); i++) {
-                listWithoutVisitedCell.add(inputList.get(i));
-            }
-        }
-        return listWithoutVisitedCell;
-    }
-
-    public Sector fillSector(int xMin, int yMin) {
-        Sector sector = new Sector();
-        // set minCell of sector
-        Cell minCell = new Cell();
-        minCell.setX(xMin);
-        minCell.setY(yMin);
-        sector.setMinCell(minCell);
-
-        // create list of cell
-        List<Cell> listCellSector = new ArrayList<>();
-
-        for (int i =0; i < 5; i++) {
-            for(int j = 0; j < 5 ;j++) {
-                Cell cell = new Cell(xMin + j, yMin + i, null, null);
-                listCellSector.add(cell);
-                if (i == 4 && j == 4) {
-                    sector.setMaxCell(cell);
-                }
-            }
-        }
-        sector.setListCell(listCellSector);
-        // check
-//        System.err.println("one sector " + listCellSector.toString());
-        return sector;
-    }
-
-    public Cell findCellWithCardinalPoint(String cardinalPoint, int x, int y) {
-        Cell cell = new Cell();
-        if (cardinalPoint.equals("S")) {
-            cell.setX(x);
-            cell.setY(y + 1);
-        }
-        if (cardinalPoint.equals("N")) {
-            cell.setX(x);
-            cell.setY(y - 1);
-        }
-        if (cardinalPoint.equals("W")) {
-            cell.setX(x - 1);
-            cell.setY(y);
-        }
-        if (cardinalPoint.equals("E")) {
-            cell.setX(x + 1);
-            cell.setY(y);
-        }
-        // check
-//        System.err.println("passage recenter cell: ");
-        return cell;
-    }
-
-    public int findMyPositionSector(Submarine mySubmarine, Board board) {
-        List<Sector> listSectors = board.getListSecteurs();
-        Cell myPositionCell = new Cell(mySubmarine.getPositionX(), mySubmarine.getPositionY(), null, null);
-        int mySector = 0;
-
-        for (Sector sector: listSectors) {
-            for (Cell cell: sector.getListCell()) {
-                if (cell.getX() == myPositionCell.getX() && cell.getY() == myPositionCell.getY()) {
-                    mySector = sector.getId();
-                }
-            }
-        }
-        // check
-//        System.err.println("my sector: " + mySector);
-        return mySector;
-    }
-
-    public int compareLifeLoopBefore(Submarine mySubmarine) {
-        int life = mySubmarine.getLife();
-        int lifeloopBefore = mySubmarine.getLifeLoopBefore();
-
-        if ((lifeloopBefore - life) == 2) {
-            return 2;
-        }
-        else if ((lifeloopBefore - life) == 1) {
-            return 1;
-        }
-        else {
-            return 0;
-        }
-    }
-
-    /**
-     * For remove cell if there is present on fullList
-     * @param fullList
-     * @param cellListToRemoveIfPresent
-     * @return full list without cell on second list(if present)
-     */
-    public List<Cell> removeCellsOnList(List<Cell> fullList, List<Cell> cellListToRemoveIfPresent) {
-        List<Cell> resultList = new ArrayList<>();
-        for (int i = 0; i < fullList.size(); i++) {
-            resultList.add(fullList.get(i));
-        }
-
-        for (int i = 0; i < fullList.size() ; i++) {
-            for (int j = 0; j < cellListToRemoveIfPresent.size(); j++) {
-                if (fullList.get(i).getX() == cellListToRemoveIfPresent.get(j).getX() &&
-                        fullList.get(i).getY() == cellListToRemoveIfPresent.get(j).getY()) {
-                    resultList.remove(fullList.get(i));
-                }
-            }
-        }
-        return resultList;
-    }
-
-    public List<Cell> findSectorCellWithPosition(Submarine mySubmarine, Board board) {
-        List<Cell> result = new ArrayList<>();
-        for (int i = 0; i < board.getListSecteurs().size(); i++) {
-            if(board.getListSecteurs().get(i).getId() == mySubmarine.getMySector()) {
-                result = board.getListSecteurs().get(i).getListCell();
-            }
-        }
-        return result;
-    }
 }

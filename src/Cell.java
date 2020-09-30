@@ -1,54 +1,50 @@
+
 class Cell {
     private int x;
     private int y;
-    private String cardinalPoint;
-    private Integer distanceToDestinationCell;
 
-    // constructor
-    public Cell() {
-    }
+    public Cell() {}
 
-    public Cell(int x, int y, String cardinalPoint, Integer distanceToDestinationCell) {
+    public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        this.cardinalPoint = cardinalPoint;
-        this.distanceToDestinationCell = distanceToDestinationCell;
     }
 
-    // getters setters
-    public int getX() {
-        return x;
-    }
-    public void setX(int x) {
-        this.x = x;
-    }
-    public int getY() {
-        return y;
-    }
-    public void setY(int y) {
-        this.y = y;
-    }
-    public String getCardinalPoint() {
-        return cardinalPoint;
-    }
-    public void setCardinalPoint(String cardinalPoint) {
-        this.cardinalPoint = cardinalPoint;
-    }
-    public Integer getDistanceToDestinationCell() {
-        return distanceToDestinationCell;
-    }
-    public void setDistanceToDestinationCell(Integer distanceToDestinationCell) {
-        this.distanceToDestinationCell = distanceToDestinationCell;
-    }
+    public void setX(int x) { this.x = x; }
+    public void setY(int y) { this.y = y; }
 
-    // to string
-    @Override
+    public int getX() { return x; }
+    public int getY() { return y; }
+
     public String toString() {
-        return "Cell{" +
-                "x=" + x +
-                ", y=" + y +
-                ", cardinalPoint='" + cardinalPoint + '\'' +
-                ", distanceToDestinationCell=" + distanceToDestinationCell +
-                '}';
+        return "{" +
+                "x: " + x +
+                " y: " + y +
+                "]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Cell other = (Cell) obj;
+        if (x != other.x)
+            return false;
+        if (y != other.y)
+            return false;
+        return true;
     }
 }

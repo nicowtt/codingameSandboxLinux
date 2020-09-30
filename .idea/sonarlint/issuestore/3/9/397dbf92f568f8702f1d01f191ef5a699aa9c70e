@@ -1,15 +1,15 @@
 
+’
+java:S1319"pThe type of the "earthMap" object should be an interface such as "Map" rather than the implementation "HashMap".(è·ìÿÿÿÿÿ8„¹áÏ”.
 
 java:S13194"pThe type of the "earthMap" object should be an interface such as "Map" rather than the implementation "HashMap".(ğõß¥8„¹áÏ”.
-]	java:S125"<This block of commented-out lines of code should be removed.(ô¥ìüÿÿÿÿ8„¹áÏ”.
-’
-java:S1319""pThe type of the "earthMap" object should be an interface such as "Map" rather than the implementation "HashMap".(ÂÌ·‹ùÿÿÿÿ8„¹áÏ”.
-
-java:S1319"pThe type of the "earthMap" object should be an interface such as "Map" rather than the implementation "HashMap".(ã†“8„¹áÏ”.
-]	java:S125D"<This block of commented-out lines of code should be removed.(£²ùğøÿÿÿÿ8„¹áÏ”.
 L
 java:S1481"*Remove this unused "value" local variable.(òå³Œøÿÿÿÿ8„¹áÏ”.
 ’
-java:S1319"pThe type of the "earthMap" object should be an interface such as "Map" rather than the implementation "HashMap".(è·ìÿÿÿÿÿ8„¹áÏ”.
+java:S1319""pThe type of the "earthMap" object should be an interface such as "Map" rather than the implementation "HashMap".(ÂÌ·‹ùÿÿÿÿ8„¹áÏ”.
+]	java:S125"<This block of commented-out lines of code should be removed.(ô¥ìüÿÿÿÿ8„¹áÏ”.
+
+java:S1319"pThe type of the "earthMap" object should be an interface such as "Map" rather than the implementation "HashMap".(ã†“8„¹áÏ”.
+]	java:S125D"<This block of commented-out lines of code should be removed.(£²ùğøÿÿÿÿ8„¹áÏ”.
 Z
 java:S1197,"8Move the array designator from the variable to the type.(ÔÑã¥şÿÿÿÿ8„¹áÏ”.
