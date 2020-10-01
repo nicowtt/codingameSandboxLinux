@@ -1,71 +1,75 @@
 
-x
-java:S1450"VRemove the "torpedo" field and declare it as a local variable in the relevant methods.(å·’ùÿÿÿÿ8şÃêÓ”.
-V
-java:S4973á"9Use the "equals" method if value comparison was intended.(€Ì¼58é²ãÓ”.
-U	java:S106g"9Replace this use of System.out or System.err by a logger.(ôëğ¢8é²ãÓ”.
-V	java:S106ˆ"9Replace this use of System.out or System.err by a logger.(¦×æ8é²ãÓ”.
-U	java:S106]"9Replace this use of System.out or System.err by a logger.(…¿Õ 8ˆÊÆÔ”.
-[	java:S106ş"9Replace this use of System.out or System.err by a logger.(‡¢˜¦ÿÿÿÿÿ8é²ãÓ”.
-V	java:S106Ø"9Replace this use of System.out or System.err by a logger.(ÌàŠ8é²ãÓ”.
-[	java:S106œ"9Replace this use of System.out or System.err by a logger.(«¢‹¾úÿÿÿÿ8é²ãÓ”.
-V	java:S106–"9Replace this use of System.out or System.err by a logger.(¹ ÿ±8é²ãÓ”.
-‡
-java:S1450"eRemove the "listCellAlreadyVisited" field and declare it as a local variable in the relevant methods.(Ñä”ÿúÿÿÿÿ8ë™òÓ”.
-Q
-java:S1066w"/Merge this if statement with the enclosing one.(²Ùœİûÿÿÿÿ8é²ãÓ”.
-‚
-java:S1450"`Remove the "opponentSubmarine" field and declare it as a local variable in the relevant methods.(ÖÃóÓúÿÿÿÿ8úîéÓ”.
-“
-java:S1319š"pThe type of the "earthMap" object should be an interface such as "Map" rather than the implementation "HashMap".(€ö¯Äùÿÿÿÿ8é²ãÓ”.
-O
-java:S1135z"2Complete the task associated to this TODO comment.(ÓÖ¼‹8é²ãÓ”.
-
-java:S1450"]Remove the "locateOpponent" field and declare it as a local variable in the relevant methods.(£å—Áüÿÿÿÿ8ÄŞêÓ”.
-W
-java:S4973İ"9Use the "equals" method if value comparison was intended.(©ûÕ8é²ãÓ”.
-V	java:S106ø"9Replace this use of System.out or System.err by a logger.(¦×æ8é²ãÓ”.
-U	java:S106§"9Replace this use of System.out or System.err by a logger.(ÏšÆ@8é²ãÓ”.
-\
-java:S4973È"9Use the "equals" method if value comparison was intended.(ùéşÌøÿÿÿÿ8é²ãÓ”.
-[	java:S106ñ"9Replace this use of System.out or System.err by a logger.(‰¯ìùÿÿÿÿ8é²ãÓ”.
-U	java:S106‰"9Replace this use of System.out or System.err by a logger.(™Ùí)8°ªÙÓ”.
+r	java:S117C"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(å¨Í‰üÿÿÿÿ8À•Ö÷Í.
 Z
-java:S1197"8Move the array designator from the variable to the type.(¡şÏÖøÿÿÿÿ8°ªÙÓ”.
-V	java:S106ˆ"9Replace this use of System.out or System.err by a logger.(à”¨8é²ãÓ”.
-Y	java:S125•"<This block of commented-out lines of code should be removed.(›ÄĞ¾8é²ãÓ”.
-Z	java:S106<"9Replace this use of System.out or System.err by a logger.(ŞãƒÛÿÿÿÿÿ8é²ãÓ”.
-[	java:S106‘"9Replace this use of System.out or System.err by a logger.(ºİí‡şÿÿÿÿ8é²ãÓ”.
+java:S1197"8Move the array designator from the variable to the type.(¡şÏÖøÿÿÿÿ8À•Ö÷Í.
+Z	java:S106\"9Replace this use of System.out or System.err by a logger.(—§ÿÿÿÿÿ8À•Ö÷Í.
+X	java:S125ô"<This block of commented-out lines of code should be removed.(µçÀC8íáşÎ.
+>
+java:S1643e"Use a StringBuilder instead.(÷Ş¹ªıÿÿÿÿ8À•Ö÷Í.
+Q
+java:S1066I"/Merge this if statement with the enclosing one.(œÉÊüÿÿÿÿ8À•Ö÷Í.
+}
+java:S1450"`Remove the "minBikeWhoSurvive" field and declare it as a local variable in the relevant methods.(õ‘ì…8åôÖşÍ.
+Y	java:S125û"<This block of commented-out lines of code should be removed.(Í‹À¡8íáşÎ.
+r	java:S117B"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢ÜËúÿÿÿÿ8À•Ö÷Í.
+T
+java:S1135W"2Complete the task associated to this TODO comment.(³ñ÷òÿÿÿÿÿ8¤Â»Î.
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨‘ğÚ8À•Ö÷Í.
+Z	java:S106$"9Replace this use of System.out or System.err by a logger.(ß±úàûÿÿÿÿ8À•Ö÷Í.
+[	java:S106¨"9Replace this use of System.out or System.err by a logger.(¥à§¼şÿÿÿÿ8»ÚäÎ.
+V	java:S106"9Replace this use of System.out or System.err by a logger.(¹ë £8À•Ö÷Í.
 R
-java:S3740š"/Provide the parametrized type for this generic.(€ö¯Äùÿÿÿÿ8”™îĞÍ.
-\
-java:S4973Ğ"9Use the "equals" method if value comparison was intended.(Õªó“ùÿÿÿÿ8é²ãÓ”.
+java:S1066 "/Merge this if statement with the enclosing one.(áÊÍıÿÿÿÿ8íáşÎ.
+r	java:S117="QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì›ñşÿÿÿÿ8À•Ö÷Í.
+:
+java:S1643±"Use a StringBuilder instead.(ğÜâà8À•Ö÷Í.
+^	java:S125¼"<This block of commented-out lines of code should be removed.(¾Ö¢¿şÿÿÿÿ8íáşÎ.
+:
+java:S1643Ó"Use a StringBuilder instead.(‘±œê8À•Ö÷Í.
+N
+java:S1481Ä"+Remove this unused "nbrMax" local variable.(êñó£şÿÿÿÿ8íáşÎ.
 u
-java:S1450	"SRemove the "move" field and declare it as a local variable in the relevant methods.(ü¢óÿÿÿÿÿ8Ë¬éÓ”.
-V	java:S106¢"9Replace this use of System.out or System.err by a logger.(êîäğ8é²ãÓ”.
-U	java:S106ã"9Replace this use of System.out or System.err by a logger.(Ö˜=8é²ãÓ”.
-^	java:S125³"<This block of commented-out lines of code should be removed.(™Ë¥ùÿÿÿÿ8é²ãÓ”.
-\
-java:S4973Ö"9Use the "equals" method if value comparison was intended.(Ùü½¨şÿÿÿÿ8é²ãÓ”.
-q
-java:S1450"TRemove the "utils" field and declare it as a local variable in the relevant methods.(öéˆ8şÃêÓ”.
-U	java:S106ù"9Replace this use of System.out or System.err by a logger.(™Ùí)8°ªÙÓ”.
-^	java:S125½"<This block of commented-out lines of code should be removed.(ç²È„øÿÿÿÿ8é²ãÓ”.
-V	java:S106ê"9Replace this use of System.out or System.err by a logger.(Ã±Ôå8Ä—Ó”.
-v
-java:S1450"TRemove the "board" field and declare it as a local variable in the relevant methods.(åÌ–®şÿÿÿÿ8şÃêÓ”.
-\
-java:S4973Ó"9Use the "equals" method if value comparison was intended.(ïüâÊıÿÿÿÿ8é²ãÓ”.
-|
-java:S1450
-"ZRemove the "mySubmarine" field and declare it as a local variable in the relevant methods.(½”üÌıÿÿÿÿ8ÂÉéÓ”.
+java:S3776Ü"RRefactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.(ëÕğøÿÿÿÿ8À•Ö÷Í.
+Z	java:S106 "9Replace this use of System.out or System.err by a logger.(İèƒáÿÿÿÿÿ8À•Ö÷Í.
+U	java:S106»"9Replace this use of System.out or System.err by a logger.(—ÜŞ#8³˜äÎ.
+^	java:S125±"<This block of commented-out lines of code should be removed.(•šã¤ùÿÿÿÿ8íáşÎ.
+Z	java:S106#"9Replace this use of System.out or System.err by a logger.(ñÎ½äüÿÿÿÿ8À•Ö÷Í.
+[	java:S106º"9Replace this use of System.out or System.err by a logger.(¯²šÎúÿÿÿÿ8ö´­şÍ.
+Z	java:S106)"9Replace this use of System.out or System.err by a logger.(ë±ùÿÿÿÿ8À•Ö÷Í.
+[	java:S106¶"9Replace this use of System.out or System.err by a logger.(·Ó»Êûÿÿÿÿ8³˜äÎ.
+m	java:S117""QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³¾ı÷8À•Ö÷Í.
+u
+java:S3776Ğ"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(½Ìäºúÿÿÿÿ8³˜äÎ.
+Y	java:S125å"<This block of commented-out lines of code should be removed.(£ÊÆÊ8íáşÎ.
+U	java:S106g"9Replace this use of System.out or System.err by a logger.(½ÑÕ8À•Ö÷Í.
+P
+java:S1135¥"2Complete the task associated to this TODO comment.(×Šƒá8»ÚäÎ.
+U	java:S106"9Replace this use of System.out or System.err by a logger.(¨‘ğÚ8À•Ö÷Í.
 o
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 63 to the 15 allowed.(“–ış8°ªÙÓ”.
-[	java:S106é"9Replace this use of System.out or System.err by a logger.(éÊó…ùÿÿÿÿ8é²ãÓ”.
-[	java:S106ë"9Replace this use of System.out or System.err by a logger.(÷™­Àúÿÿÿÿ8Ä—Ó”.
-V	java:S106ì"9Replace this use of System.out or System.err by a logger.(»ší8°ªÙÓ”.
-V	java:S106"9Replace this use of System.out or System.err by a logger.(‰ºÆœ8é²ãÓ”.
-r
-java:S1450"URemove the "deploy" field and declare it as a local variable in the relevant methods.(Îöƒœ8­ŠéÓ”.
-v
-java:S22935"YReplace the type specification in this constructor call with the diamond operator ("<>").(ƒã€©8é²ãÓ”.
+java:S3776w"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(µô˜8À•Ö÷Í.
+?
+java:S1643©"Use a StringBuilder instead.(´ñ¶üÿÿÿÿ8À•Ö÷Í.
+R
+java:S1066Ù"/Merge this if statement with the enclosing one.(ûıËÍùÿÿÿÿ8³˜äÎ.
+9
+java:S1643Â"Use a StringBuilder instead.(Ê¬‘8À•Ö÷Í.
+m	java:S117A"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ü¿““8À•Ö÷Í.
+d
+java:S1126D"BReplace this if-then-else statement by a single method invocation.(Å¼—Šüÿÿÿÿ8À•Ö÷Í.
+^	java:S125‚"<This block of commented-out lines of code should be removed.(¡£ğşÿÿÿÿ8íáşÎ.
+r	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İèƒáÿÿÿÿÿ8À•Ö÷Í.
+r	java:S117&"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öáÜÓÿÿÿÿÿ8À•Ö÷Í.
+U	java:S106§"9Replace this use of System.out or System.err by a logger.(Ó£Õ48»ÚäÎ.
+U
+java:S1135ó"2Complete the task associated to this TODO comment.(„÷ˆÿüÿÿÿÿ8³˜äÎ.
+Z	java:S106>"9Replace this use of System.out or System.err by a logger.(·Å•ğıÿÿÿÿ8À•Ö÷Í.
+p
+java:S3776‘"RRefactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.(ıïåâ8íáşÎ.
+R
+java:S1068"5Remove this unused "minBikeWhoSurvive" private field.(õ‘ì…8íáşÎ.
+o
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(“–ış8À•Ö÷Í.
+^	java:S125ş"<This block of commented-out lines of code should be removed.(Â»ÇÜıÿÿÿÿ8íáşÎ.
+Y	java:S125¬"<This block of commented-out lines of code should be removed.(”¼Õ…8íáşÎ.
+l	java:S117'"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Âã8À•Ö÷Í.
+r	java:S117%"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éÉŒÈıÿÿÿÿ8À•Ö÷Í.
