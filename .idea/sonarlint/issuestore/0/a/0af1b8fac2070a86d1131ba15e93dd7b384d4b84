@@ -1,75 +1,82 @@
 
-r	java:S117C"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(å¨Í‰üÿÿÿÿ8À•Ö÷Í.
-Z
-java:S1197"8Move the array designator from the variable to the type.(¡şÏÖøÿÿÿÿ8À•Ö÷Í.
-Z	java:S106\"9Replace this use of System.out or System.err by a logger.(—§ÿÿÿÿÿ8À•Ö÷Í.
-X	java:S125ô"<This block of commented-out lines of code should be removed.(µçÀC8íáşÎ.
->
-java:S1643e"Use a StringBuilder instead.(÷Ş¹ªıÿÿÿÿ8À•Ö÷Í.
-Q
-java:S1066I"/Merge this if statement with the enclosing one.(œÉÊüÿÿÿÿ8À•Ö÷Í.
+m	java:S117J"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì—­8ˆµÁíÎ.
 }
-java:S1450"`Remove the "minBikeWhoSurvive" field and declare it as a local variable in the relevant methods.(õ‘ì…8åôÖşÍ.
-Y	java:S125û"<This block of commented-out lines of code should be removed.(Í‹À¡8íáşÎ.
-r	java:S117B"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢ÜËúÿÿÿÿ8À•Ö÷Í.
-T
-java:S1135W"2Complete the task associated to this TODO comment.(³ñ÷òÿÿÿÿÿ8¤Â»Î.
-m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨‘ğÚ8À•Ö÷Í.
-Z	java:S106$"9Replace this use of System.out or System.err by a logger.(ß±úàûÿÿÿÿ8À•Ö÷Í.
-[	java:S106¨"9Replace this use of System.out or System.err by a logger.(¥à§¼şÿÿÿÿ8»ÚäÎ.
-V	java:S106"9Replace this use of System.out or System.err by a logger.(¹ë £8À•Ö÷Í.
-R
-java:S1066 "/Merge this if statement with the enclosing one.(áÊÍıÿÿÿÿ8íáşÎ.
-r	java:S117="QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì›ñşÿÿÿÿ8À•Ö÷Í.
-:
-java:S1643±"Use a StringBuilder instead.(ğÜâà8À•Ö÷Í.
-^	java:S125¼"<This block of commented-out lines of code should be removed.(¾Ö¢¿şÿÿÿÿ8íáşÎ.
-:
-java:S1643Ó"Use a StringBuilder instead.(‘±œê8À•Ö÷Í.
-N
-java:S1481Ä"+Remove this unused "nbrMax" local variable.(êñó£şÿÿÿÿ8íáşÎ.
-u
-java:S3776Ü"RRefactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.(ëÕğøÿÿÿÿ8À•Ö÷Í.
-Z	java:S106 "9Replace this use of System.out or System.err by a logger.(İèƒáÿÿÿÿÿ8À•Ö÷Í.
-U	java:S106»"9Replace this use of System.out or System.err by a logger.(—ÜŞ#8³˜äÎ.
-^	java:S125±"<This block of commented-out lines of code should be removed.(•šã¤ùÿÿÿÿ8íáşÎ.
-Z	java:S106#"9Replace this use of System.out or System.err by a logger.(ñÎ½äüÿÿÿÿ8À•Ö÷Í.
-[	java:S106º"9Replace this use of System.out or System.err by a logger.(¯²šÎúÿÿÿÿ8ö´­şÍ.
-Z	java:S106)"9Replace this use of System.out or System.err by a logger.(ë±ùÿÿÿÿ8À•Ö÷Í.
-[	java:S106¶"9Replace this use of System.out or System.err by a logger.(·Ó»Êûÿÿÿÿ8³˜äÎ.
-m	java:S117""QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³¾ı÷8À•Ö÷Í.
-u
-java:S3776Ğ"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(½Ìäºúÿÿÿÿ8³˜äÎ.
-Y	java:S125å"<This block of commented-out lines of code should be removed.(£ÊÆÊ8íáşÎ.
-U	java:S106g"9Replace this use of System.out or System.err by a logger.(½ÑÕ8À•Ö÷Í.
-P
-java:S1135¥"2Complete the task associated to this TODO comment.(×Šƒá8»ÚäÎ.
-U	java:S106"9Replace this use of System.out or System.err by a logger.(¨‘ğÚ8À•Ö÷Í.
+java:S1450"`Remove the "minBikeWhoSurvive" field and declare it as a local variable in the relevant methods.(õ‘ì…8Àìœ¦Î.
+Z
+java:S1197"8Move the array designator from the variable to the type.(¡şÏÖøÿÿÿÿ8Àìœ¦Î.
+m	java:S117*"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(á”Ä˜8ˆµÁíÎ.
+r	java:S117""QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼Öùÿÿÿÿ8Àìœ¦Î.
+Z	java:S106&"9Replace this use of System.out or System.err by a logger.(ß±úàûÿÿÿÿ8ìüıìÎ.
+[	java:S106Ï"9Replace this use of System.out or System.err by a logger.(¯²šÎúÿÿÿÿ8ˆµÁíÎ.
+r	java:S117K"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Üâµóûÿÿÿÿ8µâ¾íÎ.
+Z	java:S106%"9Replace this use of System.out or System.err by a logger.(ñÎ½äüÿÿÿÿ8Àìœ¦Î.
 o
-java:S3776w"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(µô˜8À•Ö÷Í.
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(“–ış8Àìœ¦Î.
+U	java:S1061"9Replace this use of System.out or System.err by a logger.(„Ÿ±»8ˆµÁíÎ.
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨‘ğÚ8Àìœ¦Î.
+m	java:S117'"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ïƒ¢¤8Àìœ¦Î.
+U	java:S106"9Replace this use of System.out or System.err by a logger.(¨‘ğÚ8Àìœ¦Î.
+Z	java:S106 "9Replace this use of System.out or System.err by a logger.(İèƒáÿÿÿÿÿ8Àìœ¦Î.
+R
+java:S1068"5Remove this unused "minBikeWhoSurvive" private field.(õ‘ì…8Àìœ¦Î.
+r	java:S117-"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ°î¯úÿÿÿÿ8ˆµÁíÎ.
+r	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İèƒáÿÿÿÿÿ8Àìœ¦Î.
+Q
+java:S1066R"/Merge this if statement with the enclosing one.(œÉÊüÿÿÿÿ8·ËÂíÎ.
+R
+java:S1066ï"/Merge this if statement with the enclosing one.(ûıËÍùÿÿÿÿ8·ËÂíÎ.
+R
+java:S1066¾"/Merge this if statement with the enclosing one.(ÍóğĞüÿÿÿÿ8·ËÂíÎ.
+R
+java:S1066Å"/Merge this if statement with the enclosing one.(áÊÍıÿÿÿÿ8·ËÂíÎ.
+R
+java:S1066ó"/Merge this if statement with the enclosing one.(µõéñıÿÿÿÿ8·ËÂíÎ.
+R
+java:S1066ù"/Merge this if statement with the enclosing one.(•Üóéÿÿÿÿÿ8·ËÂíÎ.
+R
+java:S1066›"/Merge this if statement with the enclosing one.(™Óßüıÿÿÿÿ8·ËÂíÎ.
+>
+java:S1643o"Use a StringBuilder instead.(÷Ş¹ªıÿÿÿÿ8·ËÂíÎ.
 ?
-java:S1643©"Use a StringBuilder instead.(´ñ¶üÿÿÿÿ8À•Ö÷Í.
-R
-java:S1066Ù"/Merge this if statement with the enclosing one.(ûıËÍùÿÿÿÿ8³˜äÎ.
+java:S1643³"Use a StringBuilder instead.(´ñ¶üÿÿÿÿ8·ËÂíÎ.
+:
+java:S1643»"Use a StringBuilder instead.(ğÜâà8·ËÂíÎ.
 9
-java:S1643Â"Use a StringBuilder instead.(Ê¬‘8À•Ö÷Í.
-m	java:S117A"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ü¿““8À•Ö÷Í.
+java:S1643Ì"Use a StringBuilder instead.(Ê¬‘8·ËÂíÎ.
+:
+java:S1643İ"Use a StringBuilder instead.(‘±œê8·ËÂíÎ.
+r	java:S117F"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì›ñşÿÿÿÿ8·ËÂíÎ.
+r	java:S117L"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(å¨Í‰üÿÿÿÿ8·ËÂíÎ.
+Z	java:S1062"9Replace this use of System.out or System.err by a logger.(ë±ùÿÿÿÿ8·ËÂíÎ.
+Z	java:S106G"9Replace this use of System.out or System.err by a logger.(·Å•ğıÿÿÿÿ8·ËÂíÎ.
 d
-java:S1126D"BReplace this if-then-else statement by a single method invocation.(Å¼—Šüÿÿÿÿ8À•Ö÷Í.
-^	java:S125‚"<This block of commented-out lines of code should be removed.(¡£ğşÿÿÿÿ8íáşÎ.
-r	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İèƒáÿÿÿÿÿ8À•Ö÷Í.
-r	java:S117&"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öáÜÓÿÿÿÿÿ8À•Ö÷Í.
-U	java:S106§"9Replace this use of System.out or System.err by a logger.(Ó£Õ48»ÚäÎ.
-U
-java:S1135ó"2Complete the task associated to this TODO comment.(„÷ˆÿüÿÿÿÿ8³˜äÎ.
-Z	java:S106>"9Replace this use of System.out or System.err by a logger.(·Å•ğıÿÿÿÿ8À•Ö÷Í.
+java:S1126M"BReplace this if-then-else statement by a single method invocation.(Å¼—Šüÿÿÿÿ8·ËÂíÎ.
+Z	java:S106f"9Replace this use of System.out or System.err by a logger.(—§ÿÿÿÿÿ8·ËÂíÎ.
+U	java:S106q"9Replace this use of System.out or System.err by a logger.(½ÑÕ8·ËÂíÎ.
 p
-java:S3776‘"RRefactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.(ıïåâ8íáşÎ.
-R
-java:S1068"5Remove this unused "minBikeWhoSurvive" private field.(õ‘ì…8íáşÎ.
-o
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(“–ış8À•Ö÷Í.
-^	java:S125ş"<This block of commented-out lines of code should be removed.(Â»ÇÜıÿÿÿÿ8íáşÎ.
-Y	java:S125¬"<This block of commented-out lines of code should be removed.(”¼Õ…8íáşÎ.
-l	java:S117'"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Âã8À•Ö÷Í.
-r	java:S117%"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éÉŒÈıÿÿÿÿ8À•Ö÷Í.
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(µô˜8·ËÂíÎ.
+V	java:S106§"9Replace this use of System.out or System.err by a logger.(¹ë £8·ËÂíÎ.
+u
+java:S3776æ"RRefactor this method to reduce its Cognitive Complexity from 41 to the 15 allowed.(ëÕğøÿÿÿÿ8·ËÂíÎ.
+P
+java:S1135¶"2Complete the task associated to this TODO comment.(×Šƒá8·ËÂíÎ.
+[	java:S106Ë"9Replace this use of System.out or System.err by a logger.(·Ó»Êûÿÿÿÿ8·ËÂíÎ.
+U	java:S106Ğ"9Replace this use of System.out or System.err by a logger.(—ÜŞ#8·ËÂíÎ.
+u
+java:S3776å"RRefactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.(½Ìäºúÿÿÿÿ8·ËÂíÎ.
+U
+java:S1135Œ"2Complete the task associated to this TODO comment.(„÷ˆÿüÿÿÿÿ8·ËÂíÎ.
+p
+java:S3776®"RRefactor this method to reduce its Cognitive Complexity from 49 to the 15 allowed.(ıïåâ8·ËÂíÎ.
+u
+java:S3776ä"RRefactor this method to reduce its Cognitive Complexity from 49 to the 15 allowed.(ÏçÓıüÿÿÿÿ8·ËÂíÎ.
+N
+java:S1481Î"+Remove this unused "nbrMax" local variable.(êñó£şÿÿÿÿ8·ËÂíÎ.
+Y	java:S125ñ"<This block of commented-out lines of code should be removed.(á¡ŒŒ8·ËÂíÎ.
+X	java:S125"<This block of commented-out lines of code should be removed.(µçÀC8·ËÂíÎ.
+Y	java:S125ˆ"<This block of commented-out lines of code should be removed.(Í‹À¡8·ËÂíÎ.
+^	java:S125‹"<This block of commented-out lines of code should be removed.(Â»ÇÜıÿÿÿÿ8·ËÂíÎ.
+^	java:S125"<This block of commented-out lines of code should be removed.(¡£ğşÿÿÿÿ8·ËÂíÎ.
+Y	java:S125¹"<This block of commented-out lines of code should be removed.(€ù¯8·ËÂíÎ.
+^	java:S125Æ"<This block of commented-out lines of code should be removed.(•šã¤ùÿÿÿÿ8·ËÂíÎ.
+^	java:S125Ñ"<This block of commented-out lines of code should be removed.(¾Ö¢¿şÿÿÿÿ8·ËÂíÎ.
