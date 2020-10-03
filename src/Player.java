@@ -1,7 +1,5 @@
 
 import java.util.*;
-import java.io.*;
-import java.math.*;
 
 /**
  * Auto-generated code below aims at helping you parse
@@ -18,7 +16,6 @@ class Player {
     List<Bike> bikes;
     List<Bike> simuBikes;
     private int lastPosx;
-    private int minBikeWhoSurvive;
 
     public static void main(String args[]) {
         new Player().run();
@@ -27,27 +24,15 @@ class Player {
         List<String> roads = new ArrayList<>();
         this.bikes = new ArrayList<>();
         int loop = 0;
+        String increaseRoad = "................................................................................";
         Scanner in = new Scanner(System.in);
         int M = in.nextInt(); System.err.println("Nbr of bikes: " + M);
         int V = in.nextInt(); System.err.println("Min who must survive: " + V);
-        minBikeWhoSurvive = V;
-        String L0 = in.next();
-        L0 += "................................................................................";
-        roads.add(L0);
-        System.err.println("nbr de cellX: " + L0.length());
-        System.err.println("max loop: 50");
-        String L1 = in.next();
-        L1 += "................................................................................";
-        roads.add(L1);
-        String L2 = in.next();
-        L2 += "................................................................................";
-        roads.add(L2);
-        String L3 = in.next();
-        L3 += "................................................................................";
-        roads.add(L3);
+        String L0 = in.next(); L0 += increaseRoad; roads.add(L0);
+        String L1 = in.next(); L1 += increaseRoad; roads.add(L1);
+        String L2 = in.next(); L2 += increaseRoad; roads.add(L2);
+        String L3 = in.next(); L3 += increaseRoad; roads.add(L3);
         this.lastRoad = roads.size();
-        System.err.println("nbr de cellX + 10: " + roads.get(0).length());
-        System.err.println("last road: " + this.lastRoad);
 
         // create map
         this.map = new char[roads.get(0).length()][roads.size()];
@@ -67,8 +52,7 @@ class Player {
         // game loop
         while (true) {
             this.simuMap = this.copyMap(this.map);
-            int S = in.nextInt(); // the motorbikes' speed
-            System.err.println("speed: " + S);
+            int S = in.nextInt();
             for (int i = 0; i < M; i++) {
                 this.bikes.get(i).setId(i);
                 int X = in.nextInt(); this.bikes.get(i).setX(X);
@@ -85,20 +69,17 @@ class Player {
                 }
 
             }
-
-
             // resolving puzzle
             displayMap(map);
-            // create all orders combination -> 5 words and 5 turns
+            // 1/ create all orders combination on first turn -> 5 words and 5 turns -> 3125 combinations
             if (loop == 0) {
                 this.createCombinationForSimuOrders();
                 this.simuUnit = new SimuUnit(this.simuOrders); // creation d'une simuUnit
             }
-            // simulation:
-            // je simule un ordre tous les ordres pour trouver la meilleure
+            // 2/ simulate all orders, find best scored:
             this.simulateAllOrders();
 
-            // order out:
+            // 3/ give best order
             System.out.println(this.bestOrder);
             loop++;
         }
@@ -228,19 +209,18 @@ class Player {
     }
 
     public void simulateAllOrders()  {
-        int countSimuOrder = 0;
-        // set position on simuMap
+        // 1/ display position on simuMap
         for (int k = 0; k < this.bikes.size(); k++) {
             if (this.bikes.get(k).getX() < this.lastPosx) {
                 this.simuMap[this.bikes.get(k).getX()][this.bikes.get(k).getY()] = 'B';
             }
         }
+        for (int i = 0; i < this.simuOrders.size(); i++) { // begin simulation with all orders
+            boolean bikeOnFirstRoad = false;
+            boolean bikeOnLastRoad = false;
+            int score = 0;
 
-
-        for (int i = 0; i < this.simuOrders.size(); i++) { // simulation avec la liste de tous les ordres
-            //for (int i = 1237; i < 1238; i++) { // simulation avec la liste de tous les ordres
-
-            // init
+            // ***************** initialisation *********************************
             this.simuMap = this.copyMap(map);
             this.simuBikes = new ArrayList<>();
             for (int j = 0; j < this.bikes.size(); j++) {
@@ -254,117 +234,41 @@ class Player {
                 this.simuBikes.add(newBike);
 
             }
-            boolean bikeOnFirstRoad = false;
-            boolean bikeOnLastRoad = false;
-
-            countSimuOrder++;
-            int score = 0;
-
-            // check display on map
-            //System.err.println("map before turn");
-            //this.displayMap(this.simuMap);
-
-            for (int j = 0; j < 5; j++) { // simulation avec 5 ordres
+            // 2/ simulate 5 orders
+            for (int j = 0; j < 5; j++) {
                 String order = this.simuOrders.get(i).get(j);
-                for (Bike bike: this.simuBikes ) {
-                    if (bike.getY() + 1 > this.lastRoad - 1) { bikeOnLastRoad = true; }
-                }
-                for (Bike bike: this.simuBikes ) {
-                    if (bike.getY() - 1 < 0) { bikeOnFirstRoad = true; }
-                }
-
-
-                if (order.equals("SPEED") || order.equals("SLOW")) {
-                    this.simuSpeed(order);
-                }
-
-                if (order.equals("JUMP")) {
-                    this.simuJump();
-                }
-
-
+                for (Bike bike: this.simuBikes ) { if (bike.getY() + 1 > this.lastRoad - 1) { bikeOnLastRoad = true; } }
+                for (Bike bike: this.simuBikes ) { if (bike.getY() - 1 < 0) { bikeOnFirstRoad = true; } }
+                if (order.equals("SPEED") || order.equals("SLOW")) { this.simuSpeed(order); }
+                if (order.equals("JUMP")) { this.simuJump();}
                 if (order.equals("DOWN")) {
                     if (bikeOnLastRoad) {
-                        for (Bike bike: this.simuBikes ) {
-                            bike.setInvalidOrder(true);
-                        }
+                        for (Bike bike: this.simuBikes ) { bike.setInvalidOrder(true); } // invalid order if bike is on last road
                     } else {
-                        this.simuDown();
-                    }
-
+                        this.simuDown(); }
                 }
-
                 if (order.equals("UP")) {
                     if (bikeOnFirstRoad) {
-                        for (Bike bike: this.simuBikes ) {
-                            bike.setInvalidOrder(true);
-                        }
-
+                        for (Bike bike: this.simuBikes ) { bike.setInvalidOrder(true); } // invalid order if bike is on first road
                     } else {
-
                         this.simuUp();
                     }
                 }
-
-
-                // calculate score
+                // 3 /calculate score
                 for (Bike bike : this.simuBikes) {
-                    if (bike.isInvalidOrder()) {
-                        score = -10000;
-                    }
-                    if (bike.isActive() && bike.getSpeed() > 0) {
-                        score = score + bike.getX();
-                    }
-
-                    if (!bike.isActive()) {
-                        score -= 50;
-                    }
-
-                    /*
-
-                    if (bike.isAccelerate()) {
-                        score += 10; // 30 ça passe sans bug
-                    }
-
-                     */
-
-                    // TODO check for one comb
-
-                    /*
-                    if (i == 246) {
-                        System.err.println("order 246");
-                        System.err.println("is: " + this.simuUnit.getOrders().get(246).toString());
-                        //System.err.println("simu order " + order + " bike" + bike.getId() + " is active -> " + bike.isActive());
-                        //System.err.println("bike n°:" + bike.getId() + " posX: " + bike.getX() + "posY: " + bike.getY());
-                        System.err.println("bike after one simu, one order" + bike.toString());
-                        // check display on map
-                        System.err.println("map after turn");
-                        this.displayMap(this.simuMap);
-                    }
-                    */
-
-
-
+                    if (bike.isInvalidOrder()) { score = -10000; }
+                    if (bike.isActive() && bike.getSpeed() > 0) { score = score + bike.getX(); }
+                    if (!bike.isActive()) { score -= 50; }
                 }
             }
             this.simuUnit.setScore(i, score);
-            //System.err.println("check score for" + i + " :" + this.simuUnit.getScores().get(i));
-
-
         }
-        // check
-        System.err.println("count simu order: " + countSimuOrder);
 
-        // find best score
+        // 4/ find best score
         int indexOfBestScore = this.findBestScore();
-        System.err.println("best order: " + this.simuOrders.get(indexOfBestScore).toString() + " -> N°:" + indexOfBestScore);
-        System.err.println("best score: " + this.simuUnit.getScores().get(indexOfBestScore));
-        // System.err.println("score for 0: " + this.simuUnit.getScores().get(0));
-
-
-
+        System.err.println("Best order: " + this.simuOrders.get(indexOfBestScore).toString() + " -> N°:" + indexOfBestScore + "/3125");
+        System.err.println("Score: " + this.simuUnit.getScores().get(indexOfBestScore));
         this.bestOrder = simuOrders.get(indexOfBestScore).get(0);
-
     }
 
     public int findBestScore() {
@@ -415,15 +319,12 @@ class Player {
                         && (this.simuBikes.get(i).getY() >= 0)) {
                     this.simuBikes.get(i).setActive(this.simulationCheckIfBikeIsActive(position,
                             new Cell(this.simuBikes.get(i).getX(), this.simuBikes.get(i).getY())));
-
-                    // test off
                     // set invalid order
-                    this.simulationCheckInvalidPos(this.lastRoad, order); // TODO possibility of bug -> see invalid order speed
+                    this.simulationCheckInvalidPos(this.lastRoad, order);
                     // set next position on simuMap
                     String speedStr = String.valueOf(this.simuBikes.get(i).getSpeed());
                     simuMap[this.simuBikes.get(i).getX()][this.simuBikes.get(i).getY()] = speedStr.charAt(0);
                 }
-
             }
         }
     }
@@ -447,7 +348,6 @@ class Player {
                     String speedStr = String.valueOf(this.simuBikes.get(i).getSpeed());
                     simuMap[this.simuBikes.get(i).getX()][this.simuBikes.get(i).getY()] = speedStr.charAt(0);
                 }
-
             }
         }
     }
@@ -456,25 +356,21 @@ class Player {
         for (int i = 0; i < this.simuBikes.size(); i++) {
             if (this.simuBikes.get(i).isActive()) {
                 int speed = this.simuBikes.get(i).getSpeed();
-                // check if there is hole on simuMap during this move
-                // y check
                 if (speed > 0) {
                     for (int j = 1; j <= speed; j++) {
+                        // for x
                         if (j != speed) { // on x only under speed
-                            // on x
                             if (this.simuMap[this.simuBikes.get(i).getX() + j][this.simuBikes.get(i).getY()] == '0') {
                                 this.simuBikes.get(i).setActive(false);
                             }
                         }
-
-                        // on y
+                        // for y
                         if (this.simuBikes.get(i).getY() + 1 < this.lastRoad) {
                             if (this.simuMap[this.simuBikes.get(i).getX() + j][this.simuBikes.get(i).getY() + 1] == '0') {
                                 this.simuBikes.get(i).setActive(false);
                             }
                         }
                     }
-                    // set new simu pos
                     Cell position = new Cell(this.simuBikes.get(i).getX(), this.simuBikes.get(i).getY());
                     this.simuBikes.get(i).setX(position.getX() + this.simuBikes.get(i).getSpeed());
                     this.simuBikes.get(i).setY(position.getY() + 1);
@@ -486,7 +382,6 @@ class Player {
         }
     }
 
-
     public void simuUp() {
         for (int i = 0; i < this.simuBikes.size(); i++) {
             int speed = this.simuBikes.get(i).getSpeed();
@@ -495,27 +390,16 @@ class Player {
                     // for x
                     if (j != speed) {
                         if (this.map[this.simuBikes.get(i).getX() + j][this.simuBikes.get(i).getY()] == '0') {
-
-                            // *************** write on simu map **********
-                            //this.simuMap[simuBikes.get(i).getX() + j][this.simuBikes.get(i).getY()] = 'x';
-                            // *************** write on simu Map **********
-
                             this.simuBikes.get(i).setActive(false);
                         }
                     }
                     // for y
                     if (this.simuBikes.get(i).getY() - 1 >= 0) {
                         if (this.map[this.simuBikes.get(i).getX() + j][this.simuBikes.get(i).getY() - 1] == '0') {
-
-                            // **************** write on simu map **********
-                            //this.simuMap[simuBikes.get(i).getX() + j][this.simuBikes.get(i).getY() - 1] = 'x';
-                            // **************** write on simu Map **********
-
                             this.simuBikes.get(i).setActive(false);
                         }
                     }
                 }
-                // set new simu pos
                 Cell position = new Cell(this.simuBikes.get(i).getX(), this.simuBikes.get(i).getY());
                 this.simuBikes.get(i).setX(position.getX() + this.simuBikes.get(i).getSpeed());
                 this.simuBikes.get(i).setY(position.getY() - 1);
@@ -535,7 +419,6 @@ class Player {
                     return false;
                 }
             }
-
         }
         return true;
     }

@@ -27,32 +27,6 @@ class Bike extends Cell{
     public boolean isInvalidOrder() { return invalidOrder; }
     public Cell getNextCell() { return nextCell; }
 
-    // methods
-    public Cell nextCellMove(String indication) {
-        if (indication.equals("SPEED")) {
-            if (speed == 0) {
-                return new Cell(this.getX() + 1, this.getY());
-            } else {
-                return new Cell(this.getX() + speed + 1, this.getY());
-            }
-        }
-        if (indication.equals("WAIT")) {
-            if (speed == 0) {
-                return new Cell(this.getX(), this.getY());
-            } else {
-                return new Cell(this.getX() + speed, this.getY());
-            }
-        }
-        if (indication.equals("SLOW")) {
-            if (speed == 0) {
-                return new Cell(this.getX() - 1, this.getY());
-            } else {
-                return new Cell(this.getX() + speed - 1, this.getY());
-            }
-        }
-        return new Cell();
-    }
-
     // to string
     @Override
     public String toString() {
