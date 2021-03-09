@@ -2,16 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Bender-ep1/Bender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bender-ep1/Cell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bender-ep1/Move.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bender-ep1/Solution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Bender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Move.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Solution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bike.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bike.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SimuUnit.java" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
@@ -30,37 +53,32 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="NewWatcherDialog.advanced.open" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Bender-ep1" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Application.play">
     <configuration name="play" type="Application" factoryName="Application">
@@ -86,15 +104,9 @@
       </method>
     </configuration>
   </component>
-  <component name="ServiceViewManager">
-    <option name="allServicesViewState">
-      <serviceView>
-        <treeState>
-          <expand />
-          <select />
-        </treeState>
-      </serviceView>
-    </option>
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -138,6 +150,19 @@
       <workItem from="1601541186143" duration="20118000" />
       <workItem from="1601711352438" duration="4405000" />
       <workItem from="1601731090124" duration="8893000" />
+      <workItem from="1614787855240" duration="6772000" />
+      <workItem from="1614867670125" duration="24000" />
+      <workItem from="1614867704176" duration="2000" />
+      <workItem from="1614868707085" duration="16000" />
+      <workItem from="1614868843642" duration="41000" />
+      <workItem from="1614868892862" duration="50000" />
+      <workItem from="1614869056045" duration="125000" />
+      <workItem from="1614869199653" duration="17058000" />
+      <workItem from="1614938401943" duration="9234000" />
+      <workItem from="1615210586236" duration="7068000" />
+      <workItem from="1615218208579" duration="3651000" />
+      <workItem from="1615281741631" duration="5384000" />
+      <workItem from="1615300329583" duration="2750000" />
     </task>
     <task id="LOCAL-00001" summary="puzzle bike in progress">
       <created>1601490449579</created>
@@ -157,7 +182,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.configurationType" implementationName="BashConfigurationType" />
@@ -167,13 +192,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -181,5 +205,27 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="puzzle bike in progress" />
     <option name="LAST_COMMIT_MESSAGE" value="puzzle bike in progress" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="478" y="626" width="956" height="1075" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1614873994743">
+      <screen x="0" y="626" width="1920" height="1080" />
+    </state>
+    <state x="478" y="626" width="956" height="1075" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.626.1920.1080/1920.0.1080.1920@0.626.1920.1080" timestamp="1614873994743" />
+    <state x="1944" y="849" key="SettingsEditor" timestamp="1614870030097">
+      <screen x="1920" y="0" width="1080" height="1920" />
+    </state>
+    <state x="1944" y="849" key="SettingsEditor/0.626.1920.1080/1920.0.1080.1920@0.626.1920.1080" timestamp="1614870030097" />
+    <state width="498" height="448" key="SwitcherDM" timestamp="1614880504248">
+      <screen x="0" y="626" width="1920" height="1080" />
+    </state>
+    <state width="498" height="448" key="SwitcherDM/0.626.1920.1080/1920.0.1080.1920@0.626.1920.1080" timestamp="1614880504248" />
+    <state x="641" y="708" width="638" height="891" key="find.popup" timestamp="1615216694735">
+      <screen x="0" y="626" width="1920" height="1080" />
+    </state>
+    <state x="641" y="708" width="638" height="891" key="find.popup/0.626.1920.1080/1920.0.1080.1920@0.626.1920.1080" timestamp="1615216694735" />
+    <state x="623" y="859" width="672" height="678" key="search.everywhere.popup" timestamp="1614955873837">
+      <screen x="0" y="626" width="1920" height="1080" />
+    </state>
+    <state x="623" y="859" width="672" height="678" key="search.everywhere.popup/0.626.1920.1080/1920.0.1080.1920@0.626.1920.1080" timestamp="1614955873837" />
   </component>
 </project>
