@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Bender-ep1/Bender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bender-ep1/Cell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bender-ep1/Move.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bender-ep1/Solution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Bender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Move.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Solution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="puzzle bike in progress">
+      <change afterPath="$PROJECT_DIR$/src/Asteroide.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bike.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SimuUnit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +40,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar:///Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Math.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectId" id="1a2tw1377H5wamLtMX4CFOSfrew" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -66,13 +60,13 @@
     <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Bender-ep1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -104,7 +98,7 @@
       </method>
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS" />
   </component>
@@ -206,26 +200,8 @@
     <MESSAGE value="puzzle bike in progress" />
     <option name="LAST_COMMIT_MESSAGE" value="puzzle bike in progress" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="478" y="626" width="956" height="1075" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1614873994743">
-      <screen x="0" y="626" width="1920" height="1080" />
-    </state>
-    <state x="478" y="626" width="956" height="1075" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.626.1920.1080/1920.0.1080.1920@0.626.1920.1080" timestamp="1614873994743" />
-    <state x="1944" y="849" key="SettingsEditor" timestamp="1614870030097">
-      <screen x="1920" y="0" width="1080" height="1920" />
-    </state>
-    <state x="1944" y="849" key="SettingsEditor/0.626.1920.1080/1920.0.1080.1920@0.626.1920.1080" timestamp="1614870030097" />
-    <state width="498" height="448" key="SwitcherDM" timestamp="1614880504248">
-      <screen x="0" y="626" width="1920" height="1080" />
-    </state>
-    <state width="498" height="448" key="SwitcherDM/0.626.1920.1080/1920.0.1080.1920@0.626.1920.1080" timestamp="1614880504248" />
-    <state x="641" y="708" width="638" height="891" key="find.popup" timestamp="1615216694735">
-      <screen x="0" y="626" width="1920" height="1080" />
-    </state>
-    <state x="641" y="708" width="638" height="891" key="find.popup/0.626.1920.1080/1920.0.1080.1920@0.626.1920.1080" timestamp="1615216694735" />
-    <state x="623" y="859" width="672" height="678" key="search.everywhere.popup" timestamp="1614955873837">
-      <screen x="0" y="626" width="1920" height="1080" />
-    </state>
-    <state x="623" y="859" width="672" height="678" key="search.everywhere.popup/0.626.1920.1080/1920.0.1080.1920@0.626.1920.1080" timestamp="1614955873837" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
