@@ -7,7 +7,7 @@ class Move {
      * @param myPod
      * @return
      */
-    public String moveIA1(Pod myPod, List<Checkpoint> checkpoints) {
+    public String moveIA1(Pod myPod, List<Checkpoint> checkpoints, List<MyPodSharing> myPodSharings ) {
 
         int trust = 0;
         String bestTrust = " ";
@@ -53,8 +53,8 @@ class Move {
         bestTrust+= trust;
 
         // add only one boost
-        if (!myPod.isAlreadyBoost() && myPod.distance(checkPoint) > 4000) {
-            myPod.setAlreadyBoost(true);
+        if (myPod.distance(checkPoint) > 4000 && Utils.isBoostPossible(myPodSharings)) {
+            myPodSharings.get(myPod.getId() - 1).setBoost(true);
             return (int)checkPoint.getX() + " " + (int)checkPoint.getY() + " BOOST";
         } else {
             return (int)checkPoint.getX() + " " + (int)checkPoint.getY() + bestTrust;

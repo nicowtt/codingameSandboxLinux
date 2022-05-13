@@ -1,29 +1,29 @@
 class Pod extends Unit{
+    private int id;
     private double angle;
     private int nextCheckPointId;
-    private Boolean boost;
     private int checked; // nbr de checkPoint passé
     private int timeOut; // nbr de tour avant timeOut
     private Pod partner;
     private Boolean shield;
 
-    public Pod(int checked, int timeOut) {
+    public Pod( int checked, int timeOut ) {
+        this.id = id;
         this.checked = checked;
         this.timeOut = timeOut;
-        this.boost = false;
     }
 
+    public int getId() { return id; }
     public double getAngle() { return angle; }
     public int getNextCheckPointId() { return nextCheckPointId; }
-    public Boolean isAlreadyBoost() { return boost; }
     public int getChecked() { return checked; }
     public int getTimeOut() { return timeOut; }
     public Pod getPartner() { return partner; }
     public Boolean isAlreadyShield() { return shield; }
 
+    public void setId(int id) { this.id = id;}
     public void setAngle(double angle) { this.angle = angle; }
     public void setNextCheckPointId(int nextCheckPointId) { this.nextCheckPointId = nextCheckPointId; }
-    public void setAlreadyBoost(Boolean boost) { this.boost = boost; }
     public void setChecked(int checked) { this.checked = checked; }
     public void setTimeOut(int timeOut) { this.timeOut = timeOut; }
     public void setPartner(Pod partner) { this.partner = partner; }

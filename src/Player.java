@@ -33,6 +33,13 @@ class Player {
             checkPoints.add(checkPoint);
         }
 
+        // myPodSharing
+        List<MyPodSharing> myPodSharings = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            MyPodSharing myPodSharing = new MyPodSharing(i + 1);
+            myPodSharings.add(myPodSharing);
+        }
+
         // game loop
         while (true) {
             for (int i = 0; i < 2; i++) {
@@ -42,7 +49,7 @@ class Player {
                 int vy = in.nextInt(); myPods.get(i).setVitesseY(vy);
                 int angle = in.nextInt(); myPods.get(i).setAngle(angle);
                 int nextCheckPointId = in.nextInt(); myPods.get(i).setNextCheckPointId(nextCheckPointId);
-                myPods.get(i).setId(i);
+                myPods.get(i).setId(i+1);
                 myPods.get(i).setRayon(400);
             }
             for (int i = 0; i < 2; i++) {
@@ -59,7 +66,7 @@ class Player {
             // todo methode collision a l'air ok -> j'en suis a bounce du tuto
 
             for (Pod pod: myPods ) {
-                System.out.println(move.moveIA1(pod, checkPoints));
+                System.out.println(move.moveIA1(pod, checkPoints, myPodSharings));
             }
         }
     }
