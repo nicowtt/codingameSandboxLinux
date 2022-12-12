@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="the spreading fire contest (off)&#10;save houses only" />
+    <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="test">
+      <change afterPath="$PROJECT_DIR$/fire/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/fire/MyVar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/fire/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/fire/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strat.java" beforeDir="false" afterPath="$PROJECT_DIR$/fire/strat.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,9 +43,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="jar:///Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Math.java" root0="SKIP_INSPECTION" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -52,16 +58,18 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/Users/nico/Documents/codingameSandboxLinux/pod_contest",
+    "last_opened_file_path": "/Users/nicolasbodelle/codingGame/codingameSandboxLinux/fire",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/fire" />
       <recent name="$PROJECT_DIR$/pod_contest" />
       <recent name="$PROJECT_DIR$/mainBase" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/fire" />
       <recent name="$PROJECT_DIR$/spiderAttack" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />

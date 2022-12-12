@@ -1,98 +1,87 @@
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.*;
 
-/**
- * Read the constant data of the map before the main loop, then read the state of the fire and give an action at each turn
- **/
 class Player {
-    public static int turn = 0;
-    private static char FIRE = 'f';
 
-    public static <Char> void main(String args[]) {
-        // testeux
-        Strat strat = new Strat();
-        List<String> gridLines = new ArrayList<>();
+    static final int ME = 1;
+    static final int OPP = 0;
+    static final int NONE = -1;
+
+    public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
-        int treeTreatmentDuration = in.nextInt(); // cooldown for cutting a "tree" cell
-        System.err.println("tree treatment: " + treeTreatmentDuration);
-        int treeFireDuration = in.nextInt(); // number of turns for the fire to propagate on adjacent cells from a "tree" cell
-        int treeValue = in.nextInt(); // value lost if a "tree" cell is burnt or cut
-        System.err.println("tree value: " + treeValue);
-        int houseTreatmentDuration = in.nextInt(); // cooldown for cutting a "house" cell
-        System.err.println("house treatment: " + houseTreatmentDuration);
-        int houseFireDuration = in.nextInt(); // number of turns for the fire to propagate on adjacent cells from a "house" cell
-        int houseValue = in.nextInt(); // value lost if a "house" cell is burnt or cut
-        System.err.println("house value: " + houseValue);
-        int width = in.nextInt(); // number of columns in the grid
-        int height = in.nextInt(); // number of rows in the grid
-        int fireStartX = in.nextInt(); // column where the fire starts
-        int fireStartY = in.nextInt(); // row where the fire starts
-        for (int i = 0; i < height; i++) {
-            String gridLine = in.next();
-            gridLines.add(gridLine);
-        }
-
-        Utils.createMap(gridLines, width, height);
-
-        // find all node around house to safe
-        List<Node> houses = Utils.allNodes.stream().filter(n -> n.isHouse()).collect(Collectors.toList());
-
-        // take all around houses nodes to securize
-        List<Node> allNotSecurizedListNode = new ArrayList<>();
-
-        for (Node house: houses) {
-            List<Node> notSecurizedListNode = Utils.findNodeAroundHouseNotSecureHouseOrOnFire(house);
-            allNotSecurizedListNode.addAll(notSecurizedListNode);
-        }
-        Utils.aroundHouseToSafe = allNotSecurizedListNode;
+        int width = in.nextInt();
+        int height = in.nextInt();
 
         // game loop
         while (true) {
-            turn++;
-            MyVar.loop = turn;
-            int cooldown = in.nextInt(); // number of turns remaining before you can cut a new cell
-            MyVar.cooldown = cooldown;
-            System.err.println("cooldown: " + cooldown);
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
-                    int fireProgress = in.nextInt(); // state of the fire in this cell (-2: safe, -1: no fire, 0<=.<fireDuration: fire, fireDuration: burnt)
-                    // update map
-                    if (fireProgress >= 0) {
-                        Utils.map[j][i] = FIRE;
-                        // update fire on allNodes
-                        final int x = j;
-                        final int y = i;
-                        List<Node> fire = Utils.allNodes.stream()
-                                .filter(n-> n.getX() == x && n.getY() == y)
-                                .collect(Collectors.toList());
-                        if (!fire.isEmpty()) {
-                            fire.get(0).setOnFire(true);
-                            fire.get(0).setTimeOnFire(fireProgress);
+            List<Tile> tiles = new ArrayList<>();
+            List<Tile> myTiles = new ArrayList<>();
+            List<Tile> oppTiles = new ArrayList<>();
+            List<Tile> neutralTiles = new ArrayList<>();
+            List<Tile> myUnits = new ArrayList<>();
+            List<Tile> oppUnits = new ArrayList<>();
+            List<Tile> myRecyclers = new ArrayList<>();
+            List<Tile> oppRecyclers = new ArrayList<>();
+
+            int myMatter = in.nextInt();
+            int oppMatter = in.nextInt();
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    Tile tile = new Tile(x, y, in.nextInt(), in.nextInt(), in.nextInt(), in.nextInt() == 1,
+                        in.nextInt() == 1, in.nextInt() == 1, in.nextInt() == 1);
+                    tiles.add(tile);
+
+                    if (tile.getOwner() == ME) {
+                        myTiles.add(tile);
+                        if (tile.getUnits() > 0) {
+                            myUnits.add(tile);
+                        } else if (tile.isRecycler()) {
+                            myRecyclers.add(tile);
                         }
+                    } else if (tile.getOwner() == OPP) {
+                        oppTiles.add(tile);
+                        if (tile.getUnits() > 0) {
+                            oppUnits.add(tile);
+                        } else if (tile.isRecycler()) {
+                            oppRecyclers.add(tile);
+                        }
+                    } else {
+                        neutralTiles.add(tile);
                     }
                 }
             }
-            //Utils.displayMap();
 
-            if (Utils.isHousesOnMap()) {
-                System.out.println(strat.saveHouse());
-            } else {
-                System.out.println("WAIT");
+            List<String> actions = new ArrayList<>();
+
+            for (Tile tile : myTiles) {
+                if (tile.isCanSpawn()) {
+                    int amount = 0; // TODO: pick amount of robots to spawn here
+                    if (amount > 0) {
+                        actions.add(String.format("SPAWN %d %d %d", amount, tile.getX(), tile.getY()));
+                    }
+                }
+                if (tile.isCanBuild()) {
+                    boolean shouldBuild = false; // TODO: pick whether to build recycler here
+                    if (shouldBuild) {
+                        actions.add(String.format("BUILD %d %d", tile.getX(), tile.getY()));
+                    }
+                }
             }
 
+            for (Tile tile : myUnits) {
+                Tile target = new Tile(oppUnits.get(0).getX(),oppUnits.get(0).getY()); // TODO: pick a destination
+                if (target != null) {
+                    int amount = 1; // TODO: pick amount of units to move
+                    actions.add(String.format("MOVE %d %d %d %d %d", amount, tile.getX(), tile.getY(), target.getX(), target.getY()));
+                }
+            }
 
-
-
-            // Write an action using System.out.println()
             // To debug: System.err.println("Debug messages...");
-
-            // todo 1 -> trouver la maison la plus proche du feu
-            // todo 2 -> calculer le plus court chemin entre la maison et le depart de feu
-            // todo 3 -> couper la case la plus proche de la maison en direction du feu
-
-
-            // WAIT if your intervention cooldown is not zero, else position [x] [y] of your intervention.
-            //System.out.println("WAIT");
+            if (actions.isEmpty()) {
+                System.out.println("WAIT");
+            } else {
+                System.out.println(actions.stream().collect(Collectors.joining(";")));
+            }
         }
     }
 }
