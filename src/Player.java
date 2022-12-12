@@ -9,7 +9,7 @@ class Player {
     private static char FIRE = 'f';
 
     public static <Char> void main(String args[]) {
-        // test
+        // testeux
         Strat strat = new Strat();
         List<String> gridLines = new ArrayList<>();
         Scanner in = new Scanner(System.in);
