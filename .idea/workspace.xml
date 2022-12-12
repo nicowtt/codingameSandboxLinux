@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="A-star exercice (in progress)">
-      <change afterPath="$PROJECT_DIR$/src/MyVar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Node.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/strat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compiler.sh" beforeDir="false" afterPath="$PROJECT_DIR$/compiler.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solution.java" beforeDir="false" />
-    </list>
+    <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="the spreading fire contest (off)&#10;save houses only" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,7 +53,7 @@
   "keyToString": {
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "/Users/nico/Documents/codingameSandboxLinux/pod_contest",
-    "settings.editor.selected.configurable": "inlay.hints"
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -195,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661716226652</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="the spreading fire contest (off)&#10;save houses only">
+      <created>1662021853685</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1662021853685</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,7 +221,8 @@
     <MESSAGE value="spring challenge 2022 -&gt; ligue or" />
     <MESSAGE value="init reprise" />
     <MESSAGE value="A-star exercice (in progress)" />
-    <option name="LAST_COMMIT_MESSAGE" value="A-star exercice (in progress)" />
+    <MESSAGE value="the spreading fire contest (off)&#10;save houses only" />
+    <option name="LAST_COMMIT_MESSAGE" value="the spreading fire contest (off)&#10;save houses only" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
