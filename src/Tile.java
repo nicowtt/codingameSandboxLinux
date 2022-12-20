@@ -1,4 +1,5 @@
 class Tile {
+    private int id;
     private int x;
     private int y;
     private int scrapAmount;
@@ -9,8 +10,12 @@ class Tile {
     private boolean canSpawn;
     private boolean inRangeOfRecycler;
 
-    public Tile(int x, int y, int scrapAmount, int owner, int units, boolean recycler, boolean canBuild, boolean canSpawn,
+    private int spawnScore;
+    private int buildScore;
+
+    public Tile(int id, int x, int y, int scrapAmount, int owner, int units, boolean recycler, boolean canBuild, boolean canSpawn,
         boolean inRangeOfRecycler) {
+        this.id = id;
         this.x = x;
         this.y = y;
         this.scrapAmount = scrapAmount;
@@ -25,6 +30,14 @@ class Tile {
     public Tile(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getX() {
@@ -98,4 +111,33 @@ class Tile {
     public void setInRangeOfRecycler(boolean inRangeOfRecycler) {
         this.inRangeOfRecycler = inRangeOfRecycler;
     }
+
+    public int getSpawnScore() {
+        return spawnScore;
+    }
+
+    public void setSpawnScore(int spawnScore) {
+        this.spawnScore = spawnScore;
+    }
+
+    public int getBuildScore() {
+        return buildScore;
+    }
+
+    public void setBuildScore(int buildScore) {
+        this.buildScore = buildScore;
+    }
+
+    @Override
+    public String toString() {
+        return "Tile{" +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+    private boolean isInMap() {
+        return x >= 0 && y >= 0;
+    }
+
 }
