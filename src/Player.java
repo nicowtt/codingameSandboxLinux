@@ -6,6 +6,7 @@ class Player {
     static final int ME = 1;
     static final int OPP = 0;
     static final int NONE = -1;
+
     private int myMatter;
 
     public static void main(String args[]) {
@@ -20,6 +21,7 @@ class Player {
         Utils.height = height;
         Tile[][] map = new Tile[width][height];
         int loop = 0;
+        boolean buildPhase = false;
 
         // game loop
         while (true) {
@@ -70,8 +72,6 @@ class Player {
             Utils.myTiles = myTiles;
             Utils.myRecycler = myRecyclers;
 
-            Utils.createOccupationMap();
-            Utils.updateOccupationMap();
             //Utils.printMap();
             if (loop == 1) {
                 Utils.findUnitIdFarAwayFromMiddle();
@@ -81,12 +81,27 @@ class Player {
             // ------------------------------------------------- input data -------------------------------------------------
 
             // ------------------------------------------------- action -------------------------------------------------
-            //System.err.println("Mymatter: " + this.myMatter);
+            // phase build
+            // check cover ratio
+
+            float myCover = (float)oppTiles.size() / (float)myTiles.size();
+            // System.err.println("myCover: " + myCover);
+
+            if (loop % 2 == 0 // loop pair
+                && myCover > 0.90
+            ) {
+                buildPhase = true;
+            } else {
+                buildPhase = false;
+            }
             List<String> actions = new ArrayList<>();
+            int spawnLoop = 0;
             for (Tile tile : myTiles) {
 
                 // -------- spawn ----------
-                if (tile.isCanSpawn()) {
+                if (tile.isCanSpawn()
+                    && !buildPhase
+                ) {
                     // try to better spawn
                     List<Tile> targetTiles = new ArrayList<>(oppTiles);
                     for (Tile neutralTile: neutralTiles) {
@@ -95,62 +110,67 @@ class Player {
                         }
                     }
 
-                    List<Tile> canSpawnTiles = myTiles.stream().filter(Tile::isCanSpawn).collect(Collectors.toList());
-                    if (!canSpawnTiles.isEmpty()
+                    List<Tile> canSpawnTilesNoFilter = myTiles.stream().filter(Tile::isCanSpawn).collect(Collectors.toList());
+                    if (!canSpawnTilesNoFilter.isEmpty()
                         && myMatter > 10
                     ) {
+                        // filter canSpawnTiles can move around
+                        List<Tile> canSpawnTiles = canSpawnTilesNoFilter.stream().
+                                filter(Utils::canMoveAround).collect(Collectors.toList());
+
+                        // spawn where there is max free tile
                         for (Tile canSpawnTile: canSpawnTiles) {
                             List<Integer> distances = new ArrayList<>();
                             for (Tile targetTile: targetTiles) {
                                 distances.add(Utils.distBetweenTwoTile(targetTile, canSpawnTile));
                             }
                             canSpawnTile.setSpawnScore(distances.stream().reduce(0, Integer::sum));
-
                         }
                         canSpawnTiles.sort(Comparator.comparing(Tile::getSpawnScore));
 
-                        Tile target = canSpawnTiles.get(0);
+                        Tile target = canSpawnTiles.get(spawnLoop);
+
+                        // test filter with fulfil algo
+//                        Utils.createOccupationMap();
+//                        target.setSpawnScoreFulFil(
+//                                Utils.floodFill(Utils.occupationMap, target.getX(), target.getY(), '*'));
+//                        System.err.println("target fulfil score: " + target.getSpawnScoreFulFil());
+
                         //System.err.println("spawn");
                         actions.add(String.format("SPAWN %d %d %d", 1, target.getX(), target.getY()));
                         myMatter -= 10;
+                        spawnLoop += 1;
+                        // System.err.println("passage spawn");
                     }
-
-                    // matter + 10 -> spawn on random units
-//
                 }
+
                 // -------- build ----------
                 // try same as spawn
-                //System.err.println("Mymatter after spawn: " + myMatter);
-                List<Tile> buildedTiles = myTiles.stream().filter(Tile::isRecycler).collect(Collectors.toList());
-                List<Tile> targetTiles = new ArrayList<>(oppTiles);
-                for (Tile neutralTile: neutralTiles) {
-                    if (neutralTile.getScrapAmount() > 0) {
-                        targetTiles.add(neutralTile);
-                    }
-                }
-
-                List<Tile> canBuildTiles = myTiles.stream().filter(Tile::isCanBuild).collect(Collectors.toList());
-                //System.err.println("can build tile size: " + canBuildTiles.size());
-                if ((!canBuildTiles.isEmpty()
-                    && myMatter >= 20
-                    && buildedTiles.size() < 3)
-                        || loop == 2
+                if (tile.isCanBuild()
+                    && buildPhase
                 ) {
-                    for (Tile canBuildTile: canBuildTiles) {
-                        List<Integer> distances = new ArrayList<>();
-                        for (Tile targetTile: targetTiles) {
-                            distances.add(Utils.distBetweenTwoTile(canBuildTile, targetTile));
+                    List<Tile> targetTiles = new ArrayList<>(oppTiles);
+                    for (Tile neutralTile: neutralTiles) {
+                        if (neutralTile.getScrapAmount() > 0) {
+                            targetTiles.add(neutralTile);
                         }
-                        canBuildTile.setBuildScore(distances.stream().reduce(0, Integer::sum));
-
                     }
-                    canBuildTiles.sort(Comparator.comparing(Tile::getBuildScore));
 
-                    Tile target = canBuildTiles.get(0);
-                    //System.err.println("build");
-                    actions.add(String.format("BUILD %d %d", target.getX(), target.getY()));
-                    myMatter -= 10;
-                    break;
+                    List<Tile> canBuildTiles = myTiles.stream().filter(Tile::isCanBuild).collect(Collectors.toList());
+                    //System.err.println("can build tile size: " + canBuildTiles.size());
+                    if (!canBuildTiles.isEmpty()
+                        && myMatter >= 10
+                    ) {
+
+                        canBuildTiles.sort(Comparator.comparing(Tile::getScrapAmount).reversed());
+
+                        Tile target = canBuildTiles.get(0);
+                        //System.err.println("build");
+                        actions.add(String.format("BUILD %d %d", target.getX(), target.getY()));
+                        myMatter -= 10;
+                        // System.err.println("passage build");
+                        break;
+                    }
                 }
             }
 

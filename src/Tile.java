@@ -10,7 +10,9 @@ class Tile {
     private boolean canSpawn;
     private boolean inRangeOfRecycler;
 
+    private boolean canMoveAround;
     private int spawnScore;
+    private int spawnScoreFulFil;
     private int buildScore;
 
     public Tile(int id, int x, int y, int scrapAmount, int owner, int units, boolean recycler, boolean canBuild, boolean canSpawn,
@@ -126,6 +128,22 @@ class Tile {
 
     public void setBuildScore(int buildScore) {
         this.buildScore = buildScore;
+    }
+
+    public boolean isCanMoveAround() {
+        return canMoveAround;
+    }
+
+    public void setCanMoveAround(boolean canMoveAround) {
+        this.canMoveAround = canMoveAround;
+    }
+
+    public int getSpawnScoreFulFil() {
+        return spawnScoreFulFil;
+    }
+
+    public void setSpawnScoreFulFil(int spawnScoreFulFil) {
+        this.spawnScoreFulFil = spawnScoreFulFil;
     }
 
     @Override
