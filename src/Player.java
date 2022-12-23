@@ -128,19 +128,21 @@ class Player {
                         }
                         canSpawnTiles.sort(Comparator.comparing(Tile::getSpawnScore));
 
-                        Tile target = canSpawnTiles.get(spawnLoop);
+                        if (spawnLoop < canSpawnTiles.size()) {
+                            Tile target = canSpawnTiles.get(spawnLoop);
 
-                        // test filter with fulfil algo
+                            // test filter with fulfil algo
 //                        Utils.createOccupationMap();
 //                        target.setSpawnScoreFulFil(
 //                                Utils.floodFill(Utils.occupationMap, target.getX(), target.getY(), '*'));
 //                        System.err.println("target fulfil score: " + target.getSpawnScoreFulFil());
 
-                        //System.err.println("spawn");
-                        actions.add(String.format("SPAWN %d %d %d", 1, target.getX(), target.getY()));
-                        myMatter -= 10;
-                        spawnLoop += 1;
-                        // System.err.println("passage spawn");
+                            //System.err.println("spawn");
+                            actions.add(String.format("SPAWN %d %d %d", 1, target.getX(), target.getY()));
+                            myMatter -= 10;
+                            spawnLoop += 1;
+                            // System.err.println("passage spawn");
+                        }
                     }
                 }
 
