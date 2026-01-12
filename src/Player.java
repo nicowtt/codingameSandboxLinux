@@ -87,6 +87,7 @@ class Player {
             float myCover = (float)oppTiles.size() / (float)myTiles.size();
             // System.err.println("myCover: " + myCover);
 
+
             if (loop % 2 == 0 // loop pair
                 && myCover > 0.90
             ) {
@@ -95,7 +96,8 @@ class Player {
                 buildPhase = false;
             }
             List<String> actions = new ArrayList<>();
-            int spawnLoop = 0;
+            actions.add(String.format("MESSAGE %f ", myCover));
+            int spawnLoop = 0; // test
             for (Tile tile : myTiles) {
 
                 // -------- spawn ----------
@@ -128,14 +130,18 @@ class Player {
                         }
                         canSpawnTiles.sort(Comparator.comparing(Tile::getSpawnScore));
 
+                        // test filter with fulfil algo
+//                        if (spawnLoop == 0) {
+//                            for (int i = 0; i < canSpawnTiles.size(); i++) {
+//                                Utils.createOccupationMap();
+//                                canSpawnTiles.get(i).setSpawnScoreFulFil(
+//                                    Utils.floodFill(Utils.occupationMap, canSpawnTiles.get(i).getX(), canSpawnTiles.get(i).getY(), '*'));
+//                                System.err.println("span fulfil score: " + canSpawnTiles.get(i).getSpawnScoreFulFil() + " for: " + canSpawnTiles.get(i).getX() + canSpawnTiles.get(i).getY());
+//                            }
+//                        }
+                        
                         if (spawnLoop < canSpawnTiles.size()) {
                             Tile target = canSpawnTiles.get(spawnLoop);
-
-                            // test filter with fulfil algo
-//                        Utils.createOccupationMap();
-//                        target.setSpawnScoreFulFil(
-//                                Utils.floodFill(Utils.occupationMap, target.getX(), target.getY(), '*'));
-//                        System.err.println("target fulfil score: " + target.getSpawnScoreFulFil());
 
                             //System.err.println("spawn");
                             actions.add(String.format("SPAWN %d %d %d", 1, target.getX(), target.getY()));
@@ -150,6 +156,7 @@ class Player {
                 // try same as spawn
                 if (tile.isCanBuild()
                     && buildPhase
+                    && myRecyclers.size() < 4
                 ) {
                     List<Tile> targetTiles = new ArrayList<>(oppTiles);
                     for (Tile neutralTile: neutralTiles) {
@@ -163,8 +170,10 @@ class Player {
                     if (!canBuildTiles.isEmpty()
                         && myMatter >= 10
                     ) {
-
                         canBuildTiles.sort(Comparator.comparing(Tile::getScrapAmount).reversed());
+
+                        Utils.calcBuildScore(canBuildTiles);
+                        canBuildTiles.sort(Comparator.comparing(Tile::getBuildScore).reversed());
 
                         Tile target = canBuildTiles.get(0);
                         //System.err.println("build");

@@ -31,6 +31,9 @@ abstract class Utils {
                 if (map[x][y].getScrapAmount() == 0) {
                     occupationMap[x][y] = 'X';
                 }
+                if (map[x][y].isRecycler()) {
+                    occupationMap[x][y] = 'R';
+                }
             }
         }
     }
@@ -47,8 +50,9 @@ abstract class Utils {
             for (int x = 0; x < width; x++) {
                 lines = lines + occupationMap[x][y];
             }
-            System.err.println(lines);
+            //System.err.println(lines);
         }
+        //System.err.println("************************************");
     }
 
     static void findUnitIdFarAwayFromMiddle() {
@@ -124,13 +128,50 @@ abstract class Utils {
         return Math.abs(two.getY() - one.getY()) + Math.abs(two.getX() - one.getX());
     }
 
+    static List<Tile> calcBuildScore(List<Tile> movesTiles) {
+        for (Tile tile: movesTiles) {
+            int buildScore = 0;
+            // south
+            if ((tile.getY() + 1) >= 0
+                && tile.getY() + 1 < Utils.height
+                && map[tile.getX()][tile.getY()+1].getScrapAmount() > 0
+            ) {
+                buildScore += 1;
+            }
+
+            // east
+            if ((tile.getX() + 1) >= 0
+                && tile.getX() + 1 < Utils.width
+                && map[tile.getX()+1][tile.getY()].getScrapAmount() > 0
+            ) {
+                buildScore += 1;
+            }
+
+            // north
+            if ((tile.getY() - 1) >= 0
+                && map[tile.getX()][tile.getY()-1].getScrapAmount() > 0
+            ) {
+                buildScore += 1;
+            }
+
+            // west
+            if ((tile.getX() - 1) >= 0
+                && map[tile.getX()-1][tile.getY()].getScrapAmount() > 0
+            ) {
+                buildScore += 1;
+            }
+            tile.setBuildScore(buildScore);
+        }
+        return movesTiles;
+    }
+
     private static void floodFillUtil(char[][] zone, int x, int y, char newC) {
         // avoid out of map
         if ((x >= 0 && x < width ) && (y > 0 && y < height)
             && zone[x][y] == '.'
         ) {
             fulfilCount += 1;
-            //printOccupationMap();
+            printOccupationMap();
             // Replace by new char '*' at (x, y)
             zone[x][y] = newC;
 
