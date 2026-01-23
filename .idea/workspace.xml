@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2de98f82-ba92-48c8-94bf-a866b1ffc787" name="Default Changelist" comment="fall 2022 contest">
-      <change afterPath="$PROJECT_DIR$/join the dot/Cell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/join the dot/Solution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/join the dot/Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Level of nested parentheses/Cell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Level of nested parentheses/Solution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Level of nested parentheses/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution.java" afterDir="false" />
     </list>
@@ -66,17 +66,17 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/nicolasbodelle/codinGame/join the dot",
+    "last_opened_file_path": "/Users/nicolasbodelle/codinGame/Level of nested parentheses",
     "settings.editor.selected.configurable": "watcher.settings"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/join the dot" />
+      <recent name="$PROJECT_DIR$/Level of nested parentheses" />
       <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/join the dot" />
       <recent name="$PROJECT_DIR$/compression" />
       <recent name="$PROJECT_DIR$/is the king in check (part 1 and 2)" />
-      <recent name="$PROJECT_DIR$/machine learning" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/spiderAttack" />
